@@ -1,3418 +1,1116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>WorkNest — Job Opportunities & Remote Work</title>
-
-    <meta name="description" content="Discover remote, part-time, data entry, online and flexible job opportunities.">
-    <meta name="keywords" content="remote jobs, online jobs, data entry, part time jobs, work from home, job opportunities">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        /* =========================================================
-           WORKNEST
-           Professional Job Opportunity Website
-           Single-file HTML / CSS / JavaScript
-           ========================================================= */
-
-        :root {
-            --primary: #3157d5;
-            --primary-dark: #2444b4;
-            --primary-soft: #eef2ff;
-            --accent: #18a673;
-            --accent-soft: #eafaf4;
-            --orange: #f59e0b;
-            --orange-soft: #fff7e6;
-
-            --text: #172033;
-            --text-soft: #657089;
-            --muted: #8b95a7;
-
-            --background: #f7f9fc;
-            --surface: #ffffff;
-            --surface-2: #f2f5fa;
-
-            --border: #e6eaf0;
-            --shadow-sm: 0 6px 18px rgba(23, 32, 51, 0.06);
-            --shadow-md: 0 16px 40px rgba(23, 32, 51, 0.09);
-            --shadow-lg: 0 24px 70px rgba(23, 32, 51, 0.13);
-
-            --radius-sm: 10px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --radius-xl: 32px;
-
-            --container: 1180px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-            font-family: "Inter", Arial, sans-serif;
-            color: var(--text);
-            background: var(--background);
-            line-height: 1.6;
-        }
-
-        body.menu-open {
-            overflow: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input,
-        select {
-            font: inherit;
-        }
-
-        button {
-            border: 0;
-            cursor: pointer;
-        }
-
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-        .container {
-            width: min(var(--container), calc(100% - 40px));
-            margin: 0 auto;
-        }
-
-        /* =========================================================
-           TOP BAR
-           ========================================================= */
-
-        .topbar {
-            background: #111827;
-            color: #dce2ee;
-            font-size: 13px;
-        }
-
-        .topbar-inner {
-            min-height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .topbar-left,
-        .topbar-right {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .topbar-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            white-space: nowrap;
-        }
-
-        .topbar-dot {
-            width: 7px;
-            height: 7px;
-            background: #42d392;
-            border-radius: 50%;
-            box-shadow: 0 0 0 4px rgba(66, 211, 146, 0.12);
-        }
-
-        /* =========================================================
-           HEADER
-           ========================================================= */
-
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.94);
-            border-bottom: 1px solid rgba(230, 234, 240, 0.9);
-            backdrop-filter: blur(18px);
-        }
-
-        .header-inner {
-            min-height: 76px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-        }
-
-        .brand {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            flex-shrink: 0;
-        }
-
-        .brand-mark {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            display: grid;
-            place-items: center;
-            color: #fff;
-            font-family: "Manrope", sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #3157d5, #6a7ff0);
-            box-shadow: 0 10px 24px rgba(49, 87, 213, 0.25);
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.1;
-        }
-
-        .brand-name {
-            font-family: "Manrope", sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-tagline {
-            margin-top: 4px;
-            color: var(--muted);
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-        }
-
-        .desktop-nav {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .nav-link {
-            padding: 10px 13px;
-            border-radius: 10px;
-            color: #536078;
-            font-size: 14px;
-            font-weight: 600;
-            transition: 0.2s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-            background: var(--primary-soft);
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .header-apply {
-            padding: 11px 17px;
-            border-radius: 11px;
-            color: #fff;
-            background: var(--text);
-            font-size: 13px;
-            font-weight: 700;
-            transition: 0.2s ease;
-        }
-
-        .header-apply:hover {
-            transform: translateY(-1px);
-            background: #273149;
-        }
-
-        .menu-button {
-            width: 44px;
-            height: 44px;
-            display: grid;
-            place-items: center;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text);
-            background: #fff;
-            transition: 0.2s ease;
-        }
-
-        .menu-button:hover {
-            color: var(--primary);
-            border-color: #cdd6ef;
-            background: var(--primary-soft);
-        }
-
-        .hamburger {
-            width: 19px;
-            height: 14px;
-            position: relative;
-        }
-
-        .hamburger span {
-            position: absolute;
-            left: 0;
-            width: 19px;
-            height: 2px;
-            border-radius: 10px;
-            background: currentColor;
-            transition: 0.25s ease;
-        }
-
-        .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 6px; }
-        .hamburger span:nth-child(3) { top: 12px; }
-
-        /* =========================================================
-           SIDE MENU
-           ========================================================= */
-
-        .menu-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 1100;
-            background: rgba(15, 23, 42, 0.45);
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.25s ease;
-        }
-
-        .menu-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .side-menu {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: min(390px, 92vw);
-            height: 100%;
-            padding: 24px;
-            background: #fff;
-            box-shadow: -20px 0 60px rgba(0, 0, 0, 0.14);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            overflow-y: auto;
-        }
-
-        .menu-overlay.open .side-menu {
-            transform: translateX(0);
-        }
-
-        .side-menu-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 22px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .side-menu-title {
-            font-family: "Manrope", sans-serif;
-            font-size: 19px;
-            font-weight: 800;
-        }
-
-        .close-menu {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--border);
-            border-radius: 11px;
-            background: #fff;
-            color: var(--text);
-            font-size: 20px;
-        }
-
-        .menu-list {
-            list-style: none;
-            padding: 18px 0;
-        }
-
-        .menu-list li {
-            margin-bottom: 5px;
-        }
-
-        .menu-link {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            padding: 13px 14px;
-            border-radius: 12px;
-            color: #4e5a71;
-            font-size: 14px;
-            font-weight: 650;
-            transition: 0.2s ease;
-        }
-
-        .menu-link:hover {
-            color: var(--primary);
-            background: var(--primary-soft);
-        }
-
-        .menu-icon {
-            width: 34px;
-            height: 34px;
-            display: grid;
-            place-items: center;
-            border-radius: 10px;
-            background: var(--surface-2);
-            font-size: 16px;
-        }
-
-        .menu-note {
-            padding: 17px;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            background: #fafbfe;
-            color: var(--text-soft);
-            font-size: 12px;
-            line-height: 1.7;
-        }
-
-        /* =========================================================
-           HERO
-           ========================================================= */
-
-        .hero {
-            position: relative;
-            padding: 72px 0 62px;
-            overflow: hidden;
-            background:
-                radial-gradient(circle at 15% 20%, rgba(49, 87, 213, 0.11), transparent 30%),
-                radial-gradient(circle at 90% 15%, rgba(24, 166, 115, 0.08), transparent 26%),
-                #fff;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.06fr 0.94fr;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .eyebrow {
-            width: fit-content;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 18px;
-            padding: 7px 11px;
-            border: 1px solid #dce4fb;
-            border-radius: 999px;
-            color: var(--primary);
-            background: var(--primary-soft);
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 0.7px;
-            text-transform: uppercase;
-        }
-
-        .eyebrow-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--primary);
-        }
-
-        .hero-title {
-            max-width: 680px;
-            font-family: "Manrope", sans-serif;
-            font-size: clamp(38px, 5vw, 64px);
-            line-height: 1.04;
-            letter-spacing: -2.7px;
-            font-weight: 800;
-        }
-
-        .hero-title span {
-            color: var(--primary);
-        }
-
-        .hero-description {
-            max-width: 610px;
-            margin-top: 21px;
-            color: var(--text-soft);
-            font-size: 16px;
-            line-height: 1.8;
-        }
-
-        .hero-search {
-            display: grid;
-            grid-template-columns: 1fr 150px;
-            gap: 10px;
-            max-width: 650px;
-            margin-top: 28px;
-            padding: 7px;
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            background: #fff;
-            box-shadow: var(--shadow-md);
-        }
-
-        .search-field {
-            min-width: 0;
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            padding: 0 12px;
-        }
-
-        .search-icon {
-            color: var(--muted);
-            font-size: 19px;
-        }
-
-        .search-field input {
-            width: 100%;
-            height: 44px;
-            border: 0;
-            outline: 0;
-            color: var(--text);
-            background: transparent;
-            font-size: 14px;
-        }
-
-        .search-field input::placeholder {
-            color: #a2aaba;
-        }
-
-        .search-button {
-            height: 46px;
-            border-radius: 11px;
-            color: #fff;
-            background: var(--primary);
-            font-size: 13px;
-            font-weight: 800;
-            transition: 0.2s ease;
-        }
-
-        .search-button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .hero-stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            margin-top: 29px;
-        }
-
-        .hero-stat {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            color: var(--text-soft);
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .hero-stat strong {
-            color: var(--text);
-            font-size: 13px;
-        }
-
-        .hero-visual {
-            position: relative;
-        }
-
-        .hero-image-card {
-            position: relative;
-            min-height: 450px;
-            padding: 22px;
-            overflow: hidden;
-            border-radius: 30px;
-            background:
-                linear-gradient(145deg, rgba(49,87,213,0.98), rgba(77,103,221,0.93)),
-                #3157d5;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .hero-image-card::before {
-            content: "";
-            position: absolute;
-            width: 290px;
-            height: 290px;
-            top: -110px;
-            right: -90px;
-            border-radius: 50%;
-            border: 45px solid rgba(255,255,255,0.09);
-        }
-
-        .hero-image-card::after {
-            content: "";
-            position: absolute;
-            width: 210px;
-            height: 210px;
-            left: -120px;
-            bottom: -120px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-        }
-
-        .visual-top {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .visual-badge {
-            padding: 8px 11px;
-            border-radius: 9px;
-            color: #fff;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.16);
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .visual-menu-dots {
-            display: flex;
-            gap: 4px;
-        }
-
-        .visual-menu-dots span {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.7);
-        }
-
-        .visual-main {
-            position: relative;
-            z-index: 2;
-            margin-top: 48px;
-            padding: 22px;
-            border: 1px solid rgba(255,255,255,0.16);
-            border-radius: 20px;
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(12px);
-        }
-
-        .visual-avatar {
-            width: 58px;
-            height: 58px;
-            display: grid;
-            place-items: center;
-            border-radius: 17px;
-            color: #fff;
-            background: rgba(255,255,255,0.18);
-            font-size: 25px;
-        }
-
-        .visual-main h3 {
-            margin-top: 18px;
-            color: #fff;
-            font-family: "Manrope", sans-serif;
-            font-size: 25px;
-            line-height: 1.2;
-        }
-
-        .visual-main p {
-            margin-top: 8px;
-            color: rgba(255,255,255,0.78);
-            font-size: 13px;
-        }
-
-        .visual-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-top: 18px;
-        }
-
-        .visual-tag {
-            padding: 6px 9px;
-            border-radius: 8px;
-            color: rgba(255,255,255,0.9);
-            background: rgba(255,255,255,0.12);
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        .visual-payment {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 20px;
-            margin-top: 28px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .visual-payment small {
-            display: block;
-            color: rgba(255,255,255,0.65);
-            font-size: 10px;
-        }
-
-        .visual-payment strong {
-            display: block;
-            margin-top: 2px;
-            color: #fff;
-            font-size: 23px;
-        }
-
-        .visual-apply {
-            padding: 10px 14px;
-            border-radius: 10px;
-            color: var(--primary);
-            background: #fff;
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .floating-card {
-            position: absolute;
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            padding: 13px 15px;
-            border: 1px solid rgba(230,234,240,0.8);
-            border-radius: 14px;
-            background: rgba(255,255,255,0.96);
-            box-shadow: var(--shadow-md);
-        }
-
-        .floating-card.one {
-            left: -35px;
-            bottom: 42px;
-        }
-
-        .floating-card.two {
-            right: -30px;
-            top: 110px;
-        }
-
-        .floating-icon {
-            width: 34px;
-            height: 34px;
-            display: grid;
-            place-items: center;
-            border-radius: 10px;
-            background: var(--accent-soft);
-            font-size: 16px;
-        }
-
-        .floating-card strong {
-            display: block;
-            font-size: 12px;
-        }
-
-        .floating-card span {
-            display: block;
-            margin-top: 1px;
-            color: var(--muted);
-            font-size: 10px;
-        }
-
-        /* =========================================================
-           CATEGORIES
-           ========================================================= */
-
-        .section {
-            padding: 74px 0;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 30px;
-            margin-bottom: 28px;
-        }
-
-        .section-kicker {
-            margin-bottom: 7px;
-            color: var(--primary);
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1.1px;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-family: "Manrope", sans-serif;
-            font-size: clamp(26px, 3vw, 36px);
-            line-height: 1.15;
-            letter-spacing: -1px;
-            font-weight: 800;
-        }
-
-        .section-description {
-            max-width: 520px;
-            margin-top: 8px;
-            color: var(--text-soft);
-            font-size: 13px;
-        }
-
-        .text-link {
-            color: var(--primary);
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 12px;
-        }
-
-        .category-card {
-            min-height: 145px;
-            padding: 18px;
-            border: 1px solid var(--border);
-            border-radius: 17px;
-            background: #fff;
-            box-shadow: var(--shadow-sm);
-            transition: 0.25s ease;
-        }
-
-        .category-card:hover {
-            border-color: #ced8f3;
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .category-icon {
-            width: 43px;
-            height: 43px;
-            display: grid;
-            place-items: center;
-            border-radius: 13px;
-            background: var(--primary-soft);
-            font-size: 20px;
-        }
-
-        .category-card h3 {
-            margin-top: 18px;
-            font-family: "Manrope", sans-serif;
-            font-size: 13px;
-            line-height: 1.25;
-        }
-
-        .category-card p {
-            margin-top: 5px;
-            color: var(--muted);
-            font-size: 10px;
-        }
-
-        /* =========================================================
-           FEATURED JOBS
-           ========================================================= */
-
-        .jobs-section {
-            background: #fff;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .job-toolbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .filter-button {
-            padding: 9px 13px;
-            border: 1px solid var(--border);
-            border-radius: 9px;
-            color: #667188;
-            background: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            transition: 0.2s ease;
-        }
-
-        .filter-button:hover,
-        .filter-button.active {
-            color: var(--primary);
-            border-color: #cfd8f2;
-            background: var(--primary-soft);
-        }
-
-        .sort-select {
-            height: 38px;
-            padding: 0 11px;
-            border: 1px solid var(--border);
-            border-radius: 9px;
-            outline: none;
-            color: var(--text-soft);
-            background: #fff;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .jobs-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .job-card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: #fff;
-            box-shadow: var(--shadow-sm);
-            transition: 0.25s ease;
-        }
-
-        .job-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-            border-color: #d5dcef;
-        }
-
-        .job-image {
-            position: relative;
-            height: 190px;
-            overflow: hidden;
-            background: #e9edf5;
-        }
-
-        .job-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .job-card:hover .job-image img {
-            transform: scale(1.045);
-        }
-
-        .job-featured {
-            position: absolute;
-            top: 13px;
-            left: 13px;
-            padding: 6px 8px;
-            border-radius: 8px;
-            color: #fff;
-            background: rgba(17,24,39,0.78);
-            backdrop-filter: blur(8px);
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-        }
-
-        .job-save {
-            position: absolute;
-            top: 11px;
-            right: 11px;
-            width: 34px;
-            height: 34px;
-            display: grid;
-            place-items: center;
-            border: 1px solid rgba(255,255,255,0.55);
-            border-radius: 10px;
-            color: #fff;
-            background: rgba(17,24,39,0.45);
-            backdrop-filter: blur(8px);
-            font-size: 15px;
-        }
-
-        .job-content {
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            padding: 19px;
-        }
-
-        .job-company {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--muted);
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .company-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--accent);
-        }
-
-        .job-title {
-            margin-top: 9px;
-            font-family: "Manrope", sans-serif;
-            font-size: 18px;
-            line-height: 1.3;
-            letter-spacing: -0.3px;
-        }
-
-        .job-description {
-            margin-top: 8px;
-            color: var(--text-soft);
-            font-size: 11px;
-            line-height: 1.7;
-        }
-
-        .job-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-top: 15px;
-        }
-
-        .job-meta span {
-            padding: 6px 8px;
-            border-radius: 7px;
-            color: #59657a;
-            background: var(--surface-2);
-            font-size: 9px;
-            font-weight: 700;
-        }
-
-        .job-footer {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 15px;
-            margin-top: auto;
-            padding-top: 18px;
-        }
-
-        .payment-label {
-            color: var(--muted);
-            font-size: 9px;
-            font-weight: 700;
-        }
-
-        .payment-value {
-            margin-top: 1px;
-            font-family: "Manrope", sans-serif;
-            color: var(--text);
-            font-size: 18px;
-            font-weight: 800;
-        }
-
-        .apply-button {
-            padding: 10px 13px;
-            border-radius: 9px;
-            color: #fff;
-            background: var(--primary);
-            font-size: 10px;
-            font-weight: 800;
-            transition: 0.2s ease;
-        }
-
-        .apply-button:hover {
-            background: var(--primary-dark);
-        }
-
-        .empty-state {
-            display: none;
-            padding: 50px 20px;
-            border: 1px dashed #d7ddea;
-            border-radius: 18px;
-            text-align: center;
-            color: var(--muted);
-            background: #fafbfe;
-        }
-
-        /* =========================================================
-           HOW IT WORKS
-           ========================================================= */
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .step {
-            position: relative;
-            padding: 28px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: #fff;
-        }
-
-        .step-number {
-            width: 43px;
-            height: 43px;
-            display: grid;
-            place-items: center;
-            border-radius: 13px;
-            color: var(--primary);
-            background: var(--primary-soft);
-            font-family: "Manrope", sans-serif;
-            font-size: 14px;
-            font-weight: 800;
-        }
-
-        .step h3 {
-            margin-top: 19px;
-            font-family: "Manrope", sans-serif;
-            font-size: 17px;
-        }
-
-        .step p {
-            margin-top: 8px;
-            color: var(--text-soft);
-            font-size: 12px;
-            line-height: 1.8;
-        }
-
-        /* =========================================================
-           CTA
-           ========================================================= */
-
-        .cta-section {
-            padding: 0 0 74px;
-        }
-
-        .cta {
-            position: relative;
-            overflow: hidden;
-            padding: 45px;
-            border-radius: 27px;
-            color: #fff;
-            background:
-                radial-gradient(circle at 90% 0%, rgba(255,255,255,0.13), transparent 25%),
-                linear-gradient(135deg, #17213a, #26365d);
-        }
-
-        .cta::after {
-            content: "";
-            position: absolute;
-            width: 250px;
-            height: 250px;
-            right: -80px;
-            bottom: -150px;
-            border: 35px solid rgba(255,255,255,0.05);
-            border-radius: 50%;
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 2;
-            max-width: 650px;
-        }
-
-        .cta h2 {
-            font-family: "Manrope", sans-serif;
-            font-size: clamp(27px, 3vw, 40px);
-            line-height: 1.15;
-            letter-spacing: -1px;
-        }
-
-        .cta p {
-            margin-top: 10px;
-            color: rgba(255,255,255,0.7);
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 22px;
-            padding: 12px 16px;
-            border-radius: 10px;
-            color: #17213a;
-            background: #fff;
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        /* =========================================================
-           FOOTER
-           ========================================================= */
-
-        .footer {
-            color: #aeb7c9;
-            background: #111827;
-        }
-
-        .footer-main {
-            display: grid;
-            grid-template-columns: 1.4fr 0.8fr 0.8fr 0.8fr;
-            gap: 45px;
-            padding: 62px 0 48px;
-        }
-
-        .footer-brand .brand-name {
-            color: #fff;
-        }
-
-        .footer-brand .brand-tagline {
-            color: #6f7a8f;
-        }
-
-        .footer-description {
-            max-width: 350px;
-            margin-top: 16px;
-            color: #8e99ad;
-            font-size: 12px;
-            line-height: 1.8;
-        }
-
-        .footer-column h4 {
-            margin-bottom: 14px;
-            color: #fff;
-            font-size: 12px;
-        }
-
-        .footer-column a {
-            display: block;
-            width: fit-content;
-            margin-bottom: 9px;
-            color: #8e99ad;
-            font-size: 11px;
-            transition: 0.2s ease;
-        }
-
-        .footer-column a:hover {
-            color: #fff;
-        }
-
-        .footer-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 18px 0;
-            border-top: 1px solid rgba(255,255,255,0.07);
-            color: #697489;
-            font-size: 10px;
-        }
-
-        /* =========================================================
-           MODAL / JOB DETAILS
-           ========================================================= */
-
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 1300;
-            display: grid;
-            place-items: center;
-            padding: 20px;
-            background: rgba(15, 23, 42, 0.65);
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.25s ease;
-        }
-
-        .modal-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .job-modal {
-            width: min(680px, 100%);
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: 23px;
-            background: #fff;
-            box-shadow: 0 35px 100px rgba(0,0,0,0.25);
-            transform: translateY(15px) scale(0.98);
-            transition: 0.25s ease;
-        }
-
-        .modal-overlay.open .job-modal {
-            transform: translateY(0) scale(1);
-        }
-
-        .modal-image {
-            height: 240px;
-            position: relative;
-        }
-
-        .modal-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            width: 38px;
-            height: 38px;
-            border-radius: 11px;
-            color: #fff;
-            background: rgba(17,24,39,0.55);
-            backdrop-filter: blur(8px);
-            font-size: 19px;
-        }
-
-        .modal-body {
-            padding: 27px;
-        }
-
-        .modal-label {
-            color: var(--primary);
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-        }
-
-        .modal-title {
-            margin-top: 6px;
-            font-family: "Manrope", sans-serif;
-            font-size: 27px;
-            line-height: 1.2;
-        }
-
-        .modal-description {
-            margin-top: 13px;
-            color: var(--text-soft);
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .modal-info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 9px;
-            margin-top: 20px;
-        }
-
-        .modal-info {
-            padding: 13px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: #fafbfe;
-        }
-
-        .modal-info small {
-            display: block;
-            color: var(--muted);
-            font-size: 9px;
-            font-weight: 700;
-        }
-
-        .modal-info strong {
-            display: block;
-            margin-top: 3px;
-            font-size: 11px;
-        }
-
-        .modal-apply {
-            width: 100%;
-            margin-top: 20px;
-            padding: 14px;
-            border-radius: 11px;
-            color: #fff;
-            background: var(--primary);
-            font-size: 12px;
-            font-weight: 800;
-        }
-
-        .modal-note {
-            margin-top: 11px;
-            color: var(--muted);
-            font-size: 9px;
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        /* =========================================================
-           RESPONSIVE
-           ========================================================= */
-
-        @media (max-width: 1050px) {
-            .desktop-nav {
-                display: none;
-            }
-
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 45px;
-            }
-
-            .hero-content {
-                max-width: 760px;
-            }
-
-            .hero-visual {
-                max-width: 650px;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .jobs-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-main {
-                grid-template-columns: 1.4fr 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 760px) {
-            .container {
-                width: min(var(--container), calc(100% - 28px));
-            }
-
-            .topbar-left {
-                display: none;
-            }
-
-            .topbar-inner {
-                justify-content: center;
-            }
-
-            .header-inner {
-                min-height: 68px;
-            }
-
-            .brand-mark {
-                width: 39px;
-                height: 39px;
-                border-radius: 12px;
-                font-size: 18px;
-            }
-
-            .brand-name {
-                font-size: 18px;
-            }
-
-            .brand-tagline {
-                font-size: 8px;
-            }
-
-            .header-apply {
-                display: none;
-            }
-
-            .hero {
-                padding: 50px 0 45px;
-            }
-
-            .hero-title {
-                letter-spacing: -1.8px;
-            }
-
-            .hero-description {
-                font-size: 14px;
-            }
-
-            .hero-search {
-                grid-template-columns: 1fr;
-                padding: 7px;
-            }
-
-            .search-button {
-                width: 100%;
-            }
-
-            .hero-stats {
-                gap: 14px 20px;
-            }
-
-            .hero-image-card {
-                min-height: 390px;
-            }
-
-            .floating-card.one {
-                left: 10px;
-                bottom: 18px;
-            }
-
-            .floating-card.two {
-                right: 10px;
-                top: 70px;
-            }
-
-            .section {
-                padding: 55px 0;
-            }
-
-            .section-header {
-                align-items: flex-start;
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .jobs-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .job-image {
-                height: 205px;
-            }
-
-            .job-toolbar {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .steps {
-                grid-template-columns: 1fr;
-            }
-
-            .cta {
-                padding: 32px 25px;
-            }
-
-            .footer-main {
-                grid-template-columns: 1fr 1fr;
-                gap: 35px 25px;
-            }
-
-            .footer-brand {
-                grid-column: 1 / -1;
-            }
-
-            .footer-bottom {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .modal-info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 430px) {
-            .category-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 9px;
-            }
-
-            .category-card {
-                min-height: 125px;
-                padding: 14px;
-            }
-
-            .category-card h3 {
-                margin-top: 13px;
-            }
-
-            .hero-image-card {
-                min-height: 365px;
-                padding: 16px;
-            }
-
-            .visual-main {
-                margin-top: 40px;
-                padding: 17px;
-            }
-
-            .visual-main h3 {
-                font-size: 21px;
-            }
-
-            .floating-card {
-                transform: scale(0.9);
-                transform-origin: center;
-            }
-
-            .floating-card.one {
-                left: -8px;
-            }
-
-            .floating-card.two {
-                right: -8px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WorkNest — simple, professional job opportunities for U.S. job seekers.">
+  <title>WorkNest | Find Your Next Opportunity</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --navy:#14213d;
+      --blue:#2563eb;
+      --blue-dark:#1d4ed8;
+      --blue-soft:#eff6ff;
+      --text:#172033;
+      --muted:#667085;
+      --border:#e5e7eb;
+      --bg:#f7f9fc;
+      --white:#fff;
+      --green:#15803d;
+      --shadow:0 12px 32px rgba(20,33,61,.08);
+      --radius:16px;
+      --container:1120px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Inter",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    .container{width:min(var(--container),calc(100% - 36px));margin:auto}
+
+    .topbar{
+      background:var(--navy);
+      color:#fff;
+      font-size:13px;
+    }
+    .topbar-inner{
+      min-height:38px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .topbar span{opacity:.9}
+    .language-select{
+      border:0;
+      background:transparent;
+      color:#fff;
+      font-size:13px;
+      outline:0;
+    }
+    .language-select option{color:#111827;background:#fff}
+
+    header{
+      background:rgba(255,255,255,.97);
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(10px);
+    }
+    .nav{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:-.5px;
+      color:var(--navy);
+    }
+    .brand-mark{
+      width:34px;height:34px;border-radius:9px;
+      display:grid;place-items:center;
+      background:var(--blue);color:#fff;font-size:18px;
+    }
+    nav{display:flex;align-items:center;gap:28px}
+    nav a{
+      color:#475467;
+      font-size:14px;
+      font-weight:600;
+    }
+    nav a:hover{color:var(--blue)}
+
+    .hero{
+      background:linear-gradient(180deg,#fff 0%,#f7f9fc 100%);
+      padding:74px 0 58px;
+      border-bottom:1px solid #edf0f4;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:54px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--blue);
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:16px;
+    }
+    .eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--blue)}
+    h1{
+      font-size:clamp(40px,5vw,62px);
+      line-height:1.05;
+      letter-spacing:-2.6px;
+      color:var(--navy);
+      max-width:650px;
+    }
+    .hero-copy{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:17px;
+      max-width:610px;
+    }
+    .search-box{
+      margin-top:30px;
+      background:#fff;
+      border:1px solid #d9dee8;
+      border-radius:12px;
+      padding:7px;
+      display:flex;
+      box-shadow:0 10px 28px rgba(20,33,61,.08);
+      max-width:680px;
+    }
+    .search-box input{
+      min-width:0;
+      flex:1;
+      border:0;
+      outline:0;
+      padding:13px 14px;
+      color:var(--text);
+    }
+    .search-btn{
+      border:0;
+      border-radius:8px;
+      padding:0 20px;
+      background:var(--blue);
+      color:#fff;
+      font-weight:700;
+    }
+    .search-btn:hover,.apply-btn:hover{background:var(--blue-dark)}
+    .hero-points{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 22px;
+      margin-top:20px;
+      color:#667085;
+      font-size:13px;
+    }
+    .hero-points span::before{content:"✓";color:var(--green);font-weight:800;margin-right:6px}
+
+    .hero-photo{
+      min-height:390px;
+      border-radius:22px;
+      overflow:hidden;
+      background:
+        linear-gradient(180deg,rgba(20,33,61,.02),rgba(20,33,61,.14)),
+        url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1100&q=85") center/cover;
+      box-shadow:var(--shadow);
+      position:relative;
+    }
+    .hero-photo-card{
+      position:absolute;
+      left:24px;bottom:24px;
+      background:#fff;
+      border-radius:14px;
+      padding:16px 18px;
+      box-shadow:0 12px 30px rgba(0,0,0,.13);
+      min-width:230px;
+    }
+    .hero-photo-card small{display:block;color:var(--muted);font-size:12px}
+    .hero-photo-card strong{display:block;margin-top:4px;color:var(--navy);font-size:16px}
+
+    .section{padding:64px 0}
+    .section-head{
+      display:flex;align-items:end;justify-content:space-between;
+      gap:24px;margin-bottom:26px;
+    }
+    .section-kicker{
+      color:var(--blue);
+      text-transform:uppercase;
+      letter-spacing:1.2px;
+      font-size:11px;
+      font-weight:800;
+    }
+    h2{
+      margin-top:5px;
+      color:var(--navy);
+      font-size:30px;
+      letter-spacing:-1px;
+    }
+    .section-sub{color:var(--muted);font-size:14px;margin-top:5px}
+
+    .category-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .category{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      transition:.2s ease;
+    }
+    .category:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    .category-icon{
+      width:52px;height:52px;flex:0 0 52px;border-radius:12px;
+      background:var(--blue-soft);
+      display:grid;place-items:center;
+      overflow:hidden;
+    }
+    .category-icon img{width:100%;height:100%;object-fit:cover}
+    .category strong{display:block;color:var(--navy);font-size:15px}
+    .category span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+
+    .jobs-section{padding-top:10px}
+    .job-toolbar{
+      display:flex;justify-content:space-between;align-items:center;gap:14px;
+      margin-bottom:22px;
+    }
+    .filters{display:flex;gap:8px;flex-wrap:wrap}
+    .filter{
+      border:1px solid var(--border);
+      background:#fff;
+      color:#475467;
+      border-radius:999px;
+      padding:8px 13px;
+      font-size:12px;
+      font-weight:700;
+    }
+    .filter.active,.filter:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .result-count{font-size:13px;color:var(--muted);white-space:nowrap}
+
+    .jobs-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+    .job-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:0 3px 12px rgba(20,33,61,.03);
+      transition:.2s ease;
+    }
+    .job-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+    .job-image{height:180px;position:relative;overflow:hidden}
+    .job-image img{width:100%;height:100%;object-fit:cover}
+    .badge{
+      position:absolute;top:14px;left:14px;
+      background:rgba(255,255,255,.94);
+      color:var(--navy);
+      padding:6px 9px;border-radius:7px;
+      font-size:10px;font-weight:800;
+      text-transform:uppercase;letter-spacing:.5px;
+    }
+    .job-content{padding:20px}
+    .job-title{
+      font-size:20px;
+      line-height:1.25;
+      color:var(--navy);
+      letter-spacing:-.4px;
+    }
+    .job-company{color:#667085;font-size:12px;margin-top:7px}
+    .job-description{color:var(--muted);font-size:13px;margin-top:12px;min-height:42px}
+    .meta{
+      display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;
+    }
+    .meta span{
+      border:1px solid #e4e8ef;
+      background:#fafbfc;
+      color:#475467;
+      padding:5px 8px;
+      border-radius:6px;
+      font-size:11px;
+      font-weight:700;
+    }
+    .job-location{
+      margin-top:13px;
+      font-size:12px;
+      color:#667085;
+    }
+    .job-location strong{color:#344054}
+    .apply-btn{
+      display:block;
+      width:100%;
+      margin-top:16px;
+      text-align:center;
+      background:var(--blue);
+      color:#fff;
+      border-radius:9px;
+      padding:12px 15px;
+      font-size:13px;
+      font-weight:800;
+      transition:.2s ease;
+    }
+
+    .how{
+      background:#fff;
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+    }
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .step{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:24px;
+      background:#fff;
+    }
+    .step-number{
+      width:34px;height:34px;border-radius:9px;
+      background:var(--blue-soft);color:var(--blue);
+      display:grid;place-items:center;
+      font-weight:800;font-size:12px;
+    }
+    .step h3{margin-top:16px;color:var(--navy);font-size:16px}
+    .step p{margin-top:6px;color:var(--muted);font-size:13px}
+
+    .contact{
+      background:var(--navy);
+      color:#fff;
+      padding:48px 0;
+    }
+    .contact-inner{
+      display:flex;align-items:center;justify-content:space-between;gap:28px;
+    }
+    .contact h2{color:#fff;font-size:25px}
+    .contact p{color:#cbd5e1;font-size:13px;margin-top:6px}
+    .email-link{
+      background:#fff;color:var(--navy);
+      padding:12px 16px;border-radius:9px;
+      font-size:13px;font-weight:800;
+      white-space:nowrap;
+    }
+
+    footer{
+      background:#0d172c;
+      color:#aeb9ca;
+      padding:25px 0;
+      font-size:12px;
+    }
+    .footer-inner{
+      display:flex;justify-content:space-between;gap:20px;align-items:center;
+    }
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap}
+    .footer-links a:hover{color:#fff}
+
+    .no-results{
+      display:none;
+      padding:34px;
+      text-align:center;
+      border:1px dashed #ccd3df;
+      border-radius:var(--radius);
+      color:var(--muted);
+      background:#fff;
+      grid-column:1/-1;
+    }
+
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-photo{min-height:300px}
+      .category-grid{grid-template-columns:1fr}
+      .jobs-grid{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr}
+    }
+    @media(max-width:650px){
+      .topbar-inner{justify-content:flex-end}
+      .topbar span{display:none}
+      .nav{min-height:64px}
+      nav{gap:14px}
+      nav a:nth-child(3),nav a:nth-child(4){display:none}
+      .hero{padding:50px 0 40px}
+      h1{letter-spacing:-1.8px}
+      .search-box{flex-direction:column;padding:7px}
+      .search-btn{height:46px}
+      .section{padding:48px 0}
+      .section-head{display:block}
+      .job-toolbar{align-items:flex-start;flex-direction:column}
+      .contact-inner{display:block}
+      .email-link{display:inline-block;margin-top:18px}
+      .footer-inner{display:block}
+      .footer-links{margin-top:12px}
+    }
+  
+/* ===== WorkNest expanded professional layout ===== */
+:root{
+  --wn-navy:#14213d;
+  --wn-blue:#2563eb;
+  --wn-blue-dark:#1d4ed8;
+  --wn-text:#172033;
+  --wn-muted:#64748b;
+  --wn-border:#e5e7eb;
+  --wn-soft:#f8fafc;
+  --wn-card:#ffffff;
+}
+.container{max-width:1180px}
+.hero{padding-top:72px!important;padding-bottom:72px!important}
+.hero h1{font-size:clamp(38px,5vw,62px)!important;line-height:1.08!important}
+.section{padding-top:76px!important;padding-bottom:76px!important}
+.section-head h2{font-size:clamp(30px,4vw,42px)!important}
+.jobs-grid{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))!important;gap:24px!important}
+.job-card{min-height:100%!important}
+.job-content{padding:24px!important}
+.job-title{font-size:24px!important}
+.job-description{font-size:15px!important;line-height:1.75!important}
+.meta{gap:8px!important;flex-wrap:wrap}
+.meta span{padding:6px 10px!important;border-radius:999px!important}
+.apply-btn{margin-top:18px!important;min-height:48px!important}
+.job-details{
+  margin-top:18px;
+  border:1px solid var(--wn-border);
+  border-radius:14px;
+  background:var(--wn-soft);
+  overflow:hidden;
+}
+.job-details summary{
+  cursor:pointer;
+  padding:14px 16px;
+  font-weight:800;
+  color:var(--wn-navy);
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.job-details summary::-webkit-details-marker{display:none}
+.job-details summary::after{content:"+";font-size:22px;color:var(--wn-blue)}
+.job-details[open] summary::after{content:"−"}
+.job-details-body{padding:0 16px 17px}
+.details-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.detail-item{background:#fff;border:1px solid var(--wn-border);border-radius:10px;padding:11px}
+.detail-label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--wn-muted);font-weight:800;margin-bottom:4px}
+.detail-value{font-size:13px;color:var(--wn-text);font-weight:650;line-height:1.4}
+.detail-note{margin:13px 0 0;font-size:12px;line-height:1.65;color:var(--wn-muted)}
+.job-responsibilities,.job-requirements{margin:14px 0 0;padding-left:20px;color:var(--wn-text);font-size:13px;line-height:1.65}
+.job-responsibilities li,.job-requirements li{margin:5px 0}
+.section-intro{max-width:760px;color:var(--wn-muted);line-height:1.75}
+.disclaimer-box{margin-top:24px;padding:18px 20px;border:1px solid #dbeafe;background:#eff6ff;border-radius:14px;color:#334155;font-size:13px;line-height:1.7}
+.reviews-section{background:#f8fafc}
+.review-summary{display:grid;grid-template-columns:190px 1fr;gap:26px;align-items:center;margin:28px 0}
+.review-score{background:#fff;border:1px solid var(--wn-border);border-radius:16px;padding:22px;text-align:center}
+.review-score strong{display:block;font-size:42px;color:var(--wn-navy);line-height:1}
+.review-stars{letter-spacing:3px;color:#f59e0b;font-size:21px;margin-top:8px}
+.review-count{font-size:12px;color:var(--wn-muted);margin-top:7px}
+.review-empty{background:#fff;border:1px solid var(--wn-border);border-radius:16px;padding:22px;color:var(--wn-muted);line-height:1.7}
+.review-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.review-button{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:10px;border:1px solid var(--wn-border);background:#fff;color:var(--wn-navy);font-weight:750;text-decoration:none}
+.review-button.primary{background:var(--wn-blue);color:#fff;border-color:var(--wn-blue)}
+.pepsi-card .job-image{position:relative}
+.pepsi-brand-badge{position:absolute;left:14px;bottom:14px;background:#fff;border-radius:12px;padding:7px 10px;box-shadow:0 8px 24px rgba(15,23,42,.14);font-weight:900;color:#0b4ea2;display:flex;align-items:center;gap:7px}
+.pepsi-dot{width:25px;height:25px;border-radius:50%;background:linear-gradient(145deg,#e21b2d 0 48%,#fff 49% 55%,#0b4ea2 56%);display:inline-block}
+.info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.info-card{background:#fff;border:1px solid var(--wn-border);border-radius:16px;padding:22px}
+.info-card h3{margin:10px 0 8px;color:var(--wn-navy);font-size:18px}
+.info-card p{margin:0;color:var(--wn-muted);line-height:1.7;font-size:14px}
+@media(max-width:800px){
+  .review-summary{grid-template-columns:1fr}
+  .info-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .hero{padding-top:52px!important;padding-bottom:52px!important}
+  .section{padding-top:56px!important;padding-bottom:56px!important}
+  .jobs-grid{grid-template-columns:1fr!important}
+  .details-grid{grid-template-columns:1fr}
+  .job-content{padding:20px!important}
+}
+
+</style>
 </head>
 
 <body>
-
-    <!-- =========================================================
-         TOP BAR
-         ========================================================= -->
-    <div class="topbar">
-        <div class="container topbar-inner">
-
-            <div class="topbar-left">
-                <span class="topbar-item">
-                    <span class="topbar-dot"></span>
-                    New opportunities added regularly
-                </span>
-
-                <span class="topbar-item">
-                    Flexible work options
-                </span>
-            </div>
-
-            <div class="topbar-right">
-                <span class="topbar-item">
-                    Browse opportunities
-                </span>
-            </div>
-
-        </div>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span data-i18n="topbar">Professional job opportunities for U.S. job seekers</span>
+      <select id="languageSelect" class="language-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
     </div>
+  </div>
 
-
-    <!-- =========================================================
-         HEADER
-         ========================================================= -->
-    <header class="site-header">
-
-        <div class="container header-inner">
-
-            <a href="#home" class="brand">
-
-                <div class="brand-mark">
-                    W
-                </div>
-
-                <div class="brand-text">
-                    <span class="brand-name">WorkNest</span>
-                    <span class="brand-tagline">Work • Opportunity • Growth</span>
-                </div>
-
-            </a>
-
-
-            <nav class="desktop-nav">
-
-                <a href="#home" class="nav-link active">
-                    Home
-                </a>
-
-                <a href="#featured" class="nav-link">
-                    Opportunities
-                </a>
-
-                <a href="#categories" class="nav-link">
-                    Categories
-                </a>
-
-                <a href="#how-it-works" class="nav-link">
-                    How It Works
-                </a>
-
-            </nav>
-
-
-            <div class="header-actions">
-
-                <a href="#featured" class="header-apply">
-                    Explore Jobs
-                </a>
-
-                <button class="menu-button" id="openMenu" aria-label="Open menu">
-
-                    <span class="hamburger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <!-- =========================================================
-         SIDE MENU
-         ========================================================= -->
-    <div class="menu-overlay" id="menuOverlay">
-
-        <aside class="side-menu">
-
-            <div class="side-menu-header">
-
-                <div class="side-menu-title">
-                    Explore WorkNest
-                </div>
-
-                <button class="close-menu" id="closeMenu" aria-label="Close menu">
-                    ×
-                </button>
-
-            </div>
-
-
-            <ul class="menu-list">
-
-                <li>
-                    <a href="#home" class="menu-link menu-close-link">
-                        <span class="menu-icon">🏠</span>
-                        Home
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#featured" class="menu-link menu-close-link">
-                        <span class="menu-icon">💼</span>
-                        Job Offers
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#categories" class="menu-link menu-close-link">
-                        <span class="menu-icon">🗂️</span>
-                        Categories
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#how-it-works" class="menu-link menu-close-link">
-                        <span class="menu-icon">📌</span>
-                        How It Works
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#disclaimer" class="menu-link menu-close-link">
-                        <span class="menu-icon">⚠️</span>
-                        Disclaimer
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#privacy" class="menu-link menu-close-link">
-                        <span class="menu-icon">🔒</span>
-                        Privacy Policy
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#contact" class="menu-link menu-close-link">
-                        <span class="menu-icon">📞</span>
-                        Contact
-                    </a>
-                </li>
-
-            </ul>
-
-
-            <div class="menu-note">
-                Opportunities listed on this website may link to external
-                websites. Always review the details and eligibility
-                requirements before applying.
-            </div>
-
-        </aside>
-
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="WorkNest home">
+        <span class="brand-mark">W</span>
+        WorkNest
+      </a>
+      <nav>
+        <a href="#home" data-i18n="navHome">Home</a>
+        <a href="#jobs" data-i18n="navJobs">Jobs</a>
+        <a href="#categories" data-i18n="navCategories">Categories</a>
+        <a href="#contact" data-i18n="navContact">Contact</a><a href="#reviews" data-i18n="reviewsKicker">Reviews & Ratings</a>
+      </nav>
     </div>
-
-
-    <!-- =========================================================
-         HERO
-         ========================================================= -->
-    <main>
-
-        <section class="hero" id="home">
-
-            <div class="container hero-grid">
-
-                <div class="hero-content">
-
-                    <div class="eyebrow">
-                        <span class="eyebrow-dot"></span>
-                        Find your next opportunity
-                    </div>
-
-
-                    <h1 class="hero-title">
-                        Discover work that
-                        <span>fits your life.</span>
-                    </h1>
-
-
-                    <p class="hero-description">
-                        Explore carefully presented opportunities across
-                        remote work, online tasks, data entry, flexible
-                        schedules, part-time roles and more.
-                    </p>
-
-
-                    <form class="hero-search" id="searchForm">
-
-                        <div class="search-field">
-
-                            <span class="search-icon">
-                                ⌕
-                            </span>
-
-                            <input
-                                type="search"
-                                id="searchInput"
-                                placeholder="Search jobs, skills or categories..."
-                                autocomplete="off"
-                            >
-
-                        </div>
-
-                        <button type="submit" class="search-button">
-                            Search Opportunities
-                        </button>
-
-                    </form>
-
-
-                    <div class="hero-stats">
-
-                        <div class="hero-stat">
-                            <strong>Flexible</strong>
-                            <span>Work options</span>
-                        </div>
-
-                        <div class="hero-stat">
-                            <strong>Remote</strong>
-                            <span>Opportunities</span>
-                        </div>
-
-                        <div class="hero-stat">
-                            <strong>Updated</strong>
-                            <span>Listings</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="hero-visual">
-
-                    <div class="hero-image-card">
-
-                        <div class="visual-top">
-
-                            <div class="visual-badge">
-                                Featured Opportunity
-                            </div>
-
-                            <div class="visual-menu-dots">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-
-                        </div>
-
-
-                        <div class="visual-main">
-
-                            <div class="visual-avatar">
-                                💻
-                            </div>
-
-                            <h3>
-                                Remote Data Entry
-                                Opportunity
-                            </h3>
-
-                            <p>
-                                Flexible online work with
-                                convenient scheduling.
-                            </p>
-
-
-                            <div class="visual-tags">
-
-                                <span class="visual-tag">
-                                    Remote
-                                </span>
-
-                                <span class="visual-tag">
-                                    Part-Time
-                                </span>
-
-                                <span class="visual-tag">
-                                    Flexible
-                                </span>
-
-                            </div>
-
-
-                            <div class="visual-payment">
-
-                                <div>
-                                    <small>
-                                        Listed compensation
-                                    </small>
-
-                                    <strong>
-                                        $15–$25/hr
-                                    </strong>
-                                </div>
-
-                                <a href="#featured" class="visual-apply">
-                                    View Opportunity
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="floating-card one">
-
-                        <div class="floating-icon">
-                            ✓
-                        </div>
-
-                        <div>
-                            <strong>Fresh listings</strong>
-                            <span>New opportunities</span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="floating-card two">
-
-                        <div class="floating-icon">
-                            🌍
-                        </div>
-
-                        <div>
-                            <strong>Flexible access</strong>
-                            <span>Browse online</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             CATEGORIES
-             ===================================================== -->
-        <section class="section" id="categories">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <div>
-
-                        <div class="section-kicker">
-                            Browse categories
-                        </div>
-
-                        <h2 class="section-title">
-                            Find an opportunity that matches you
-                        </h2>
-
-                        <p class="section-description">
-                            Explore different types of work and choose
-                            the opportunity that fits your schedule,
-                            skills and preferences.
-                        </p>
-
-                    </div>
-
-                    <a href="#featured" class="text-link">
-                        View all opportunities →
-                    </a>
-
-                </div>
-
-
-                <div class="category-grid">
-
-                    <a href="#featured" class="category-card category-filter" data-category="Remote">
-
-                        <div class="category-icon">
-                            💻
-                        </div>
-
-                        <h3>
-                            Remote Jobs
-                        </h3>
-
-                        <p>
-                            Work from anywhere
-                        </p>
-
-                    </a>
-
-
-                    <a href="#featured" class="category-card category-filter" data-category="Data Entry">
-
-                        <div class="category-icon">
-                            ⌨️
-                        </div>
-
-                        <h3>
-                            Data Entry
-                        </h3>
-
-                        <p>
-                            Online data tasks
-                        </p>
-
-                    </a>
-
-
-                    <a href="#featured" class="category-card category-filter" data-category="Part-Time">
-
-                        <div class="category-icon">
-                            ⏰
-                        </div>
-
-                        <h3>
-                            Part-Time
-                        </h3>
-
-                        <p>
-                            Flexible schedules
-                        </p>
-
-                    </a>
-
-
-                    <a href="#featured" class="category-card category-filter" data-category="Online">
-
-                        <div class="category-icon">
-                            🌐
-                        </div>
-
-                        <h3>
-                            Online Work
-                        </h3>
-
-                        <p>
-                            Digital opportunities
-                        </p>
-
-                    </a>
-
-
-                    <a href="#featured" class="category-card category-filter" data-category="Customer">
-
-                        <div class="category-icon">
-                            💬
-                        </div>
-
-                        <h3>
-                            Customer Support
-                        </h3>
-
-                        <p>
-                            Service opportunities
-                        </p>
-
-                    </a>
-
-
-                    <a href="#featured" class="category-card category-filter" data-category="Flexible">
-
-                        <div class="category-icon">
-                            🕒
-                        </div>
-
-                        <h3>
-                            Flexible Work
-                        </h3>
-
-                        <p>
-                            Work on your time
-                        </p>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             JOBS
-             ===================================================== -->
-        <section class="section jobs-section" id="featured">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <div>
-
-                        <div class="section-kicker">
-                            Latest opportunities
-                        </div>
-
-                        <h2 class="section-title">
-                            Featured job opportunities
-                        </h2>
-
-                        <p class="section-description">
-                            Browse the latest opportunities and open
-                            the details to learn more.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="job-toolbar">
-
-                    <div class="filter-group" id="filterGroup">
-
-                        <button class="filter-button active" data-filter="All">
-                            All
-                        </button>
-
-                        <button class="filter-button" data-filter="Remote">
-                            Remote
-                        </button>
-
-                        <button class="filter-button" data-filter="Data Entry">
-                            Data Entry
-                        </button>
-
-                        <button class="filter-button" data-filter="Part-Time">
-                            Part-Time
-                        </button>
-
-                        <button class="filter-button" data-filter="Online">
-                            Online
-                        </button>
-
-                    </div>
-
-
-                    <select class="sort-select" id="sortSelect">
-
-                        <option value="featured">
-                            Sort: Featured
-                        </option>
-
-                        <option value="newest">
-                            Sort: Newest
-                        </option>
-
-                        <option value="payment">
-                            Sort: Payment
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="jobs-grid" id="jobsGrid">
-
-                    <!-- JOB 01 -->
-                    <article
-                        class="job-card"
-                        data-category="Remote Data Entry"
-                        data-title="Remote Data Entry Assistant"
-                        data-payment="25"
-                        data-date="6"
-                        data-image="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85"
-                        data-description="A flexible remote opportunity involving organized online data tasks, document handling and basic digital work."
-                    >
-
-                        <div class="job-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85"
-                                alt="Remote data entry workspace"
-                                loading="lazy"
-                            >
-
-                            <span class="job-featured">
-                                Featured
-                            </span>
-
-                            <button class="job-save" type="button" aria-label="Save opportunity">
-                                ♡
-                            </button>
-
-                        </div>
-
-
-                        <div class="job-content">
-
-                            <div class="job-company">
-                                <span class="company-dot"></span>
-                                Work Opportunity
-                            </div>
-
-                            <h3 class="job-title">
-                                Remote Data Entry Assistant
-                            </h3>
-
-                            <p class="job-description">
-                                Flexible online opportunity for basic
-                                data and digital tasks.
-                            </p>
-
-                            <div class="job-meta">
-                                <span>Remote</span>
-                                <span>Part-Time</span>
-                                <span>Online</span>
-                            </div>
-
-                            <div class="job-footer">
-
-                                <div>
-                                    <div class="payment-label">
-                                        Listed payment
-                                    </div>
-
-                                    <div class="payment-value">
-                                        $15–$25/hr
-                                    </div>
-                                </div>
-
-                                <button class="apply-button view-job" type="button">
-                                    View Details
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- JOB 02 -->
-                    <article
-                        class="job-card"
-                        data-category="Remote Online"
-                        data-title="Online Customer Support Opportunity"
-                        data-payment="22"
-                        data-date="5"
-                        data-image="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=85"
-                        data-description="A customer-focused online opportunity involving communication, answering questions and assisting users."
-                    >
-
-                        <div class="job-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=85"
-                                alt="Customer support professional"
-                                loading="lazy"
-                            >
-
-                            <span class="job-featured">
-                                New
-                            </span>
-
-                            <button class="job-save" type="button" aria-label="Save opportunity">
-                                ♡
-                            </button>
-
-                        </div>
-
-
-                        <div class="job-content">
-
-                            <div class="job-company">
-                                <span class="company-dot"></span>
-                                Online Opportunity
-                            </div>
-
-                            <h3 class="job-title">
-                                Online Customer Support Opportunity
-                            </h3>
-
-                            <p class="job-description">
-                                Flexible digital work focused on
-                                communication and customer assistance.
-                            </p>
-
-                            <div class="job-meta">
-                                <span>Remote</span>
-                                <span>Flexible</span>
-                                <span>Online</span>
-                            </div>
-
-                            <div class="job-footer">
-
-                                <div>
-                                    <div class="payment-label">
-                                        Listed payment
-                                    </div>
-
-                                    <div class="payment-value">
-                                        $16–$22/hr
-                                    </div>
-                                </div>
-
-                                <button class="apply-button view-job" type="button">
-                                    View Details
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- JOB 03 -->
-                    <article
-                        class="job-card"
-                        data-category="Part-Time Flexible"
-                        data-title="Flexible Part-Time Work"
-                        data-payment="20"
-                        data-date="4"
-                        data-image="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85"
-                        data-description="A flexible part-time opportunity designed for people looking for convenient scheduling and online work."
-                    >
-
-                        <div class="job-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85"
-                                alt="Modern flexible workspace"
-                                loading="lazy"
-                            >
-
-                            <span class="job-featured">
-                                Popular
-                            </span>
-
-                            <button class="job-save" type="button" aria-label="Save opportunity">
-                                ♡
-                            </button>
-
-                        </div>
-
-
-                        <div class="job-content">
-
-                            <div class="job-company">
-                                <span class="company-dot"></span>
-                                Flexible Work
-                            </div>
-
-                            <h3 class="job-title">
-                                Flexible Part-Time Work
-                            </h3>
-
-                            <p class="job-description">
-                                Part-time online work with flexible
-                                scheduling and simple tasks.
-                            </p>
-
-                            <div class="job-meta">
-                                <span>Part-Time</span>
-                                <span>Flexible</span>
-                                <span>Remote</span>
-                            </div>
-
-                            <div class="job-footer">
-
-                                <div>
-                                    <div class="payment-label">
-                                        Listed payment
-                                    </div>
-
-                                    <div class="payment-value">
-                                        $14–$20/hr
-                                    </div>
-                                </div>
-
-                                <button class="apply-button view-job" type="button">
-                                    View Details
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- JOB 04 -->
-                    <article
-                        class="job-card"
-                        data-category="Online Data Entry"
-                        data-title="Online Form & Data Specialist"
-                        data-payment="24"
-                        data-date="3"
-                        data-image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=85"
-                        data-description="Online work involving forms, spreadsheets and structured information. Requirements vary by listing."
-                    >
-
-                        <div class="job-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=85"
-                                alt="Data and spreadsheet work"
-                                loading="lazy"
-                            >
-
-                            <button class="job-save" type="button" aria-label="Save opportunity">
-                                ♡
-                            </button>
-
-                        </div>
-
-
-                        <div class="job-content">
-
-                            <div class="job-company">
-                                <span class="company-dot"></span>
-                                Digital Work
-                            </div>
-
-                            <h3 class="job-title">
-                                Online Form & Data Specialist
-                            </h3>
-
-                            <p class="job-description">
-                                Structured online tasks involving forms,
-                                spreadsheets and digital information.
-                            </p>
-
-                            <div class="job-meta">
-                                <span>Online</span>
-                                <span>Data Entry</span>
-                                <span>Flexible</span>
-                            </div>
-
-                            <div class="job-footer">
-
-                                <div>
-                                    <div class="payment-label">
-                                        Listed payment
-                                    </div>
-
-                                    <div class="payment-value">
-                                        $15–$24/hr
-                                    </div>
-                                </div>
-
-                                <button class="apply-button view-job" type="button">
-                                    View Details
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- JOB 05 -->
-                    <article
-                        class="job-card"
-                        data-category="Remote Customer"
-                        data-title="Remote Service Assistant"
-                        data-payment="21"
-                        data-date="2"
-                        data-image="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1000&q=85"
-                        data-description="Remote service opportunity focused on communication and assisting customers through online channels."
-                    >
-
-                        <div class="job-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1000&q=85"
-                                alt="Remote service assistant"
-                                loading="lazy"
-                            >
-
-                            <button class="job-save" type="button" aria-label="Save opportunity">
-                                ♡
-                            </button>
-
-                        </div>
-
-
-                        <div class="job-content">
-
-                            <div class="job-company">
-                                <span class="company-dot"></span>
-                                Service Opportunity
-                            </div>
-
-                            <h3 class="job-title">
-                                Remote Service Assistant
-                            </h3>
-
-                            <p class="job-description">
-                                Online support and communication work
-                                with flexible scheduling.
-                            </p>
-
-                            <div class="job-meta">
-                                <span>Remote</span>
-                                <span>Customer</span>
-                                <span>Flexible</span>
-                            </div>
-
-                            <div class="job-footer">
-
-                                <div>
-                                    <div class="payment-label">
-                                        Listed payment
-                                    </div>
-
-                                    <div class="payment-value">
-                                        $15–$21/hr
-                                    </div>
-                                </div>
-
-                                <button class="apply-button view-job" type="button">
-                                    View Details
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- JOB 06 -->
-                    <article
-                        class="job-card"
-                        data-category="Part-Time Online"
-                        data-title="Part-Time Online Assistant"
-                        data-payment="18"
-                        data-date="1"
-                        data-image="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85"
-                        data-description="A part-time online opportunity with flexible scheduling. Check the individual listing for eligibility and requirements."
-                    >
-
-                        <div class="job-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85"
-                                alt="Online team work"
-                                loading="lazy"
-                            >
-
-                            <button class="job-save" type="button" aria-label="Save opportunity">
-                                ♡
-                            </button>
-
-                        </div>
-
-
-                        <div class="job-content">
-
-                            <div class="job-company">
-                                <span class="company-dot"></span>
-                                Online Opportunity
-                            </div>
-
-                            <h3 class="job-title">
-                                Part-Time Online Assistant
-                            </h3>
-
-                            <p class="job-description">
-                                Flexible part-time digital opportunity
-                                with convenient online access.
-                            </p>
-
-                            <div class="job-meta">
-                                <span>Part-Time</span>
-                                <span>Online</span>
-                                <span>Flexible</span>
-                            </div>
-
-                            <div class="job-footer">
-
-                                <div>
-                                    <div class="payment-label">
-                                        Listed payment
-                                    </div>
-
-                                    <div class="payment-value">
-                                        $12–$18/hr
-                                    </div>
-                                </div>
-
-                                <button class="apply-button view-job" type="button">
-                                    View Details
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-
-                <div class="empty-state" id="emptyState">
-                    No matching opportunities were found.
-                    Try another search or category.
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             HOW IT WORKS
-             ===================================================== -->
-        <section class="section" id="how-it-works">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <div>
-
-                        <div class="section-kicker">
-                            Simple process
-                        </div>
-
-                        <h2 class="section-title">
-                            How it works
-                        </h2>
-
-                    </div>
-
-                </div>
-
-
-                <div class="steps">
-
-                    <div class="step">
-
-                        <div class="step-number">
-                            01
-                        </div>
-
-                        <h3>
-                            Browse opportunities
-                        </h3>
-
-                        <p>
-                            Explore categories and review the
-                            available opportunity cards.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step">
-
-                        <div class="step-number">
-                            02
-                        </div>
-
-                        <h3>
-                            Review the details
-                        </h3>
-
-                        <p>
-                            Read the description, work type,
-                            requirements and other information.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step">
-
-                        <div class="step-number">
-                            03
-                        </div>
-
-                        <h3>
-                            Apply on the relevant page
-                        </h3>
-
-                        <p>
-                            Follow the official application flow
-                            and review all terms before proceeding.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             CTA
-             ===================================================== -->
-        <section class="cta-section">
-
-            <div class="container">
-
-                <div class="cta">
-
-                    <div class="cta-content">
-
-                        <h2>
-                            Your next opportunity could be
-                            one click away.
-                        </h2>
-
-                        <p>
-                            Browse current listings and discover
-                            flexible work opportunities that may
-                            match your interests.
-                        </p>
-
-                        <a href="#featured" class="cta-button">
-                            Browse Opportunities →
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             DISCLAIMER / PRIVACY / CONTACT
-             ===================================================== -->
-        <section class="section" id="disclaimer">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <div>
-
-                        <div class="section-kicker">
-                            Important information
-                        </div>
-
-                        <h2 class="section-title">
-                            Before you apply
-                        </h2>
-
-                        <p class="section-description">
-                            Please review the information below before
-                            using any external application link.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="steps">
-
-                    <div class="step">
-
-                        <div class="step-number">
-                            ⚠️
-                        </div>
-
-                        <h3>
-                            Disclaimer
-                        </h3>
-
-                        <p>
-                            WorkNest is an information and opportunity
-                            listing website. We do not guarantee employment,
-                            acceptance, income or results. External offers
-                            may have their own eligibility rules and terms.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step" id="privacy">
-
-                        <div class="step-number">
-                            🔒
-                        </div>
-
-                        <h3>
-                            Privacy Policy
-                        </h3>
-
-                        <p>
-                            We aim to keep browsing simple and transparent.
-                            External websites may have separate privacy
-                            policies. Review the privacy terms of any
-                            third-party website before submitting information.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step" id="contact">
-
-                        <div class="step-number">
-                            📞
-                        </div>
-
-                        <h3>
-                            Contact
-                        </h3>
-
-                        <p>
-                            For questions about listings or website
-                            information, contact:
-                            <br><br>
-                            <strong>contact@example.com</strong>
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================================================
-         FOOTER
-         ========================================================= -->
-    <footer class="footer">
-
-        <div class="container footer-main">
-
-            <div class="footer-brand">
-
-                <a href="#home" class="brand">
-
-                    <div class="brand-mark">
-                        W
-                    </div>
-
-                    <div class="brand-text">
-                        <span class="brand-name">WorkNest</span>
-                        <span class="brand-tagline">Work • Opportunity • Growth</span>
-                    </div>
-
-                </a>
-
-                <p class="footer-description">
-                    A clean and simple place to discover flexible
-                    work opportunities, online jobs and useful
-                    employment resources.
-                </p>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>
-                    Explore
-                </h4>
-
-                <a href="#featured">
-                    Job Offers
-                </a>
-
-                <a href="#categories">
-                    Categories
-                </a>
-
-                <a href="#how-it-works">
-                    How It Works
-                </a>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>
-                    Information
-                </h4>
-
-                <a href="#disclaimer">
-                    Disclaimer
-                </a>
-
-                <a href="#privacy">
-                    Privacy Policy
-                </a>
-
-                <a href="#contact">
-                    Contact
-                </a>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>
-                    Categories
-                </h4>
-
-                <a href="#featured">
-                    Remote
-                </a>
-
-                <a href="#featured">
-                    Data Entry
-                </a>
-
-                <a href="#featured">
-                    Part-Time
-                </a>
-
-                <a href="#featured">
-                    Online Work
-                </a>
-
-            </div>
-
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span><span data-i18n="eyebrow">JOB OPPORTUNITIES</span></div>
+          <h1 data-i18n="heroTitle">Find Your Next Opportunity</h1>
+          <p class="hero-copy" data-i18n="heroCopy">
+            Explore selected remote, full-time and part-time opportunities in one simple place.
+          </p>
+
+          <form class="search-box" id="searchForm">
+            <input id="searchInput" type="search" autocomplete="off"
+              data-i18n-placeholder="searchPlaceholder"
+              placeholder="Search jobs or keywords">
+            <button class="search-btn" type="submit" data-i18n="searchButton">Search Jobs</button>
+          </form>
+
+          <div class="hero-points">
+            <span data-i18n="point1">Simple job search</span>
+            <span data-i18n="point2">U.S. opportunities</span>
+            <span data-i18n="point3">Direct application links</span>
+          </div>
         </div>
 
+        <div class="hero-photo" aria-label="People working together">
+          <div class="hero-photo-card">
+            <small data-i18n="featuredLabel">Featured opportunities</small>
+            <strong data-i18n="featuredText">Browse. Choose. Apply.</strong>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <div class="container footer-bottom">
-
-            <span>
-                © 2026 WorkNest. All rights reserved.
-            </span>
-
-            <span>
-                Opportunities may link to external websites.
-            </span>
-
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker" data-i18n="categoryKicker">Browse by category</div>
+            <h2 data-i18n="categoryTitle">Find work that fits your schedule</h2>
+            <p class="section-sub" data-i18n="categorySub">Choose a category to narrow the opportunities below.</p>
+          </div>
         </div>
 
-    </footer>
-
-
-    <!-- =========================================================
-         JOB DETAILS MODAL
-         ========================================================= -->
-    <div class="modal-overlay" id="jobModal">
-
-        <div class="job-modal">
-
-            <div class="modal-image">
-
-                <img id="modalImage" src="" alt="Job opportunity">
-
-                <button class="modal-close" id="closeModal" aria-label="Close">
-                    ×
-                </button>
-
+        <div class="category-grid">
+          <a class="category" href="#jobs" data-category-link="Remote">
+            <div class="category-icon">
+              <img src="https://images.unsplash.com/photo-1587560699334-bea93391dcef?auto=format&fit=crop&w=300&q=80" alt="Remote work">
             </div>
-
-
-            <div class="modal-body">
-
-                <div class="modal-label">
-                    Opportunity details
-                </div>
-
-                <h2 class="modal-title" id="modalTitle">
-                    Job title
-                </h2>
-
-                <p class="modal-description" id="modalDescription">
-                    Job description
-                </p>
-
-
-                <div class="modal-info-grid">
-
-                    <div class="modal-info">
-                        <small>Work Type</small>
-                        <strong>Flexible / Online</strong>
-                    </div>
-
-                    <div class="modal-info">
-                        <small>Location</small>
-                        <strong>See offer details</strong>
-                    </div>
-
-                    <div class="modal-info">
-                        <small>Payment</small>
-                        <strong id="modalPayment">$—</strong>
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="modal-apply"
-                    id="modalApply"
-                    type="button"
-                >
-                    Continue to Application
-                </button>
-
-
-                <p class="modal-note">
-                    Replace the application destination in the JavaScript
-                    section with your authorized offer URL before publishing.
-                </p>
-
+            <div>
+              <strong data-i18n="remote">Remote Jobs</strong>
+              <span data-i18n="remoteSub">Work from home opportunities</span>
             </div>
+          </a>
 
+          <a class="category" href="#jobs" data-category-link="Full-Time">
+            <div class="category-icon">
+              <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=300&q=80" alt="Full-time office work">
+            </div>
+            <div>
+              <strong data-i18n="fullTime">Full-Time Jobs</strong>
+              <span data-i18n="fullTimeSub">Regular work opportunities</span>
+            </div>
+          </a>
+
+          <a class="category" href="#jobs" data-category-link="Part-Time">
+            <div class="category-icon">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=300&q=80" alt="Part-time work">
+            </div>
+            <div>
+              <strong data-i18n="partTime">Part-Time Jobs</strong>
+              <span data-i18n="partTimeSub">Flexible work opportunities</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section jobs-section" id="jobs">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker" data-i18n="jobsKicker">Featured opportunities</div>
+            <h2 data-i18n="jobsTitle">Available Jobs</h2>
+            <p class="section-sub" data-i18n="jobsSub">Review the opportunity and apply directly through the listing.</p>
+          </div>
         </div>
 
+        <div class="job-toolbar">
+          <div class="filters" id="filters">
+            <button class="filter active" data-filter="All" data-i18n="all">All Jobs</button>
+            <button class="filter" data-filter="Remote" data-i18n="remoteFilter">Remote</button>
+            <button class="filter" data-filter="Full-Time" data-i18n="fullTimeFilter">Full-Time</button>
+            <button class="filter" data-filter="Part-Time" data-i18n="partTimeFilter">Part-Time</button>
+          </div>
+          <div class="result-count" id="resultCount"></div>
+        </div>
+
+        <div class="jobs-grid" id="jobsGrid">
+          <article class="job-card" data-category="Full-Time" data-search="higher income jobs full time usa">
+            <div class="job-image">
+              <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85" alt="Professional workplace">
+              <span class="badge" data-i18n="fullTime">Full-Time</span>
+            </div>
+            <div class="job-content">
+              <h3 class="job-title">Higher Income Jobs</h3>
+              <div class="job-company" data-i18n="listing">Job opportunity listing</div>
+              <p class="job-description" data-i18n="higherDesc">Explore a work opportunity with application details available through the listing.</p>
+              <div class="meta"><span data-i18n="fullTime">Full-Time</span><span>USA</span></div>
+              <div class="job-location">📍 <strong>USA</strong> · <span data-i18n="locationAvailable">Location details available through the application</span></div>
+              
+              <details class="job-details">
+                <summary data-i18n="jobDetails">Job Details</summary>
+                <div class="job-details-body">
+                  <div class="details-grid">
+                    <div class="detail-item"><span class="detail-label" data-i18n="jobType">Job Type</span><span class="detail-value" data-detail-type="Higher Income Jobs">Full-Time</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workLocation">Location</span><span class="detail-value">USA</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workSetting">Work Setting</span><span class="detail-value" data-detail-setting="Higher Income Jobs">See external listing</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="application">Application</span><span class="detail-value" data-i18n="externalApplication">External application</span></div>
+                  </div>
+                  <h4 data-i18n="responsibilities">What to Review</h4>
+                  <ul class="job-responsibilities" data-detail-resp="Higher Income Jobs">
+                    <li>Review the position information provided in the external listing.</li><li>Check the current application requirements before applying.</li><li>Complete the application through the external listing.</li>
+                  </ul>
+                  <h4 data-i18n="requirements">Before You Apply</h4>
+                  <ul class="job-requirements" data-detail-req="Higher Income Jobs">
+                    <li>Review the listing for current qualifications and requirements.</li><li>Provide accurate information during the application process.</li>
+                  </ul>
+                  <p class="detail-note" data-i18n="detailsNote">This page provides a job listing summary. Review the external application for the latest role information, requirements, and instructions. Availability and hiring decisions are determined by the external listing.</p>
+                </div>
+              </details>
+<a class="apply-btn" href="https://www.af9m8trk.com/7B4114HH/S8J12D2X/" target="_blank" rel="noopener noreferrer" data-i18n="apply">Apply Now</a>
+            </div>
+          </article>
+
+          <article class="job-card" data-category="Part-Time" data-search="cleaning jobs part time usa">
+            <div class="job-image">
+              <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=85" alt="Cleaning work">
+              <span class="badge" data-i18n="partTime">Part-Time</span>
+            </div>
+            <div class="job-content">
+              <h3 class="job-title">Cleaning Jobs</h3>
+              <div class="job-company" data-i18n="jobListing">Job opportunity listing</div>
+              <p class="job-description" data-i18n="cleaningDesc">Browse a cleaning opportunity and review the application information provided by the external listing.</p>
+              <div class="meta"><span data-i18n="partTime">Part-Time</span><span>USA</span></div>
+              <div class="job-location">📍 <strong>USA</strong> · <span data-i18n="locationAvailable">Location details available through the application</span></div>
+              
+              <details class="job-details">
+                <summary data-i18n="jobDetails">Job Details</summary>
+                <div class="job-details-body">
+                  <div class="details-grid">
+                    <div class="detail-item"><span class="detail-label" data-i18n="jobType">Job Type</span><span class="detail-value" data-detail-type="Cleaning Jobs">Part-Time</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workLocation">Location</span><span class="detail-value">USA</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workSetting">Work Setting</span><span class="detail-value" data-detail-setting="Cleaning Jobs">See external listing</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="application">Application</span><span class="detail-value" data-i18n="externalApplication">External application</span></div>
+                  </div>
+                  <h4 data-i18n="responsibilities">What to Review</h4>
+                  <ul class="job-responsibilities" data-detail-resp="Cleaning Jobs">
+                    <li>Review the cleaning position information in the external listing.</li><li>Check the current role requirements and application instructions.</li><li>Submit the requested information through the application page.</li>
+                  </ul>
+                  <h4 data-i18n="requirements">Before You Apply</h4>
+                  <ul class="job-requirements" data-detail-req="Cleaning Jobs">
+                    <li>Review the listing for current qualifications.</li><li>Follow the application instructions provided by the external listing.</li>
+                  </ul>
+                  <p class="detail-note" data-i18n="detailsNote">This page provides a job listing summary. Review the external application for the latest role information, requirements, and instructions. Availability and hiring decisions are determined by the external listing.</p>
+                </div>
+              </details>
+<a class="apply-btn" href="https://go2affm.com/c/?p=64672&o=19951" target="_blank" rel="noopener noreferrer" data-i18n="apply">Apply Now</a>
+            </div>
+          </article>
+
+          <article class="job-card" data-category="Remote" data-search="amazon from home remote work from home usa">
+            <div class="job-image">
+              <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85" alt="Remote work from home">
+              <span class="badge" data-i18n="remote">Remote</span>
+            </div>
+            <div class="job-content">
+              <h3 class="job-title">Amazon From Home</h3>
+              <div class="job-company" data-i18n="jobListing">Job opportunity listing</div>
+              <p class="job-description" data-i18n="amazonDesc">Explore a work-from-home opportunity and review the application requirements on the external listing.</p>
+              <div class="meta"><span data-i18n="remote">Remote</span><span data-i18n="workFromHome">Work From Home</span><span>USA</span></div>
+              <div class="job-location">📍 <strong>USA</strong> · <span data-i18n="remoteLocation">Remote</span></div>
+              
+              <details class="job-details">
+                <summary data-i18n="jobDetails">Job Details</summary>
+                <div class="job-details-body">
+                  <div class="details-grid">
+                    <div class="detail-item"><span class="detail-label" data-i18n="jobType">Job Type</span><span class="detail-value" data-detail-type="Amazon From Home">Remote</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workLocation">Location</span><span class="detail-value">USA</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workSetting">Work Setting</span><span class="detail-value" data-detail-setting="Amazon From Home">Work From Home</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="application">Application</span><span class="detail-value" data-i18n="externalApplication">External application</span></div>
+                  </div>
+                  <h4 data-i18n="responsibilities">What to Review</h4>
+                  <ul class="job-responsibilities" data-detail-resp="Amazon From Home">
+                    <li>Review the remote opportunity and the information supplied by the external listing.</li><li>Check the current application requirements.</li><li>Continue to the external application when ready.</li>
+                  </ul>
+                  <h4 data-i18n="requirements">Before You Apply</h4>
+                  <ul class="job-requirements" data-detail-req="Amazon From Home">
+                    <li>Review the external listing for current requirements.</li><li>Use accurate information when completing the application.</li>
+                  </ul>
+                  <p class="detail-note" data-i18n="detailsNote">This page provides a job listing summary. Review the external application for the latest role information, requirements, and instructions. Availability and hiring decisions are determined by the external listing.</p>
+                </div>
+              </details>
+<a class="apply-btn" href="https://www.af9m8trk.com/7B4114HH/1QE12Q9Z/" target="_blank" rel="noopener noreferrer" data-i18n="apply">Apply Now</a>
+            </div>
+          </article>
+
+          <article class="job-card" data-category="Full-Time" data-search="start a career today full time usa">
+            <div class="job-image">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85" alt="Professional office">
+              <span class="badge" data-i18n="fullTime">Full-Time</span>
+            </div>
+            <div class="job-content">
+              <h3 class="job-title">Start A Career Today</h3>
+              <div class="job-company" data-i18n="jobListing">Job opportunity listing</div>
+              <p class="job-description" data-i18n="careerDesc">Review the available career opportunity and application details through the external listing.</p>
+              <div class="meta"><span data-i18n="fullTime">Full-Time</span><span>USA</span></div>
+              <div class="job-location">📍 <strong>USA</strong> · <span data-i18n="locationAvailable">Location details available through the application</span></div>
+              
+              <details class="job-details">
+                <summary data-i18n="jobDetails">Job Details</summary>
+                <div class="job-details-body">
+                  <div class="details-grid">
+                    <div class="detail-item"><span class="detail-label" data-i18n="jobType">Job Type</span><span class="detail-value" data-detail-type="Start A Career Today">Full-Time</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workLocation">Location</span><span class="detail-value">USA</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workSetting">Work Setting</span><span class="detail-value" data-detail-setting="Start A Career Today">See external listing</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="application">Application</span><span class="detail-value" data-i18n="externalApplication">External application</span></div>
+                  </div>
+                  <h4 data-i18n="responsibilities">What to Review</h4>
+                  <ul class="job-responsibilities" data-detail-resp="Start A Career Today">
+                    <li>Review the opportunity information before applying.</li><li>Check the current requirements and application instructions.</li><li>Complete the application through the external listing.</li>
+                  </ul>
+                  <h4 data-i18n="requirements">Before You Apply</h4>
+                  <ul class="job-requirements" data-detail-req="Start A Career Today">
+                    <li>Review the listing for current qualifications.</li><li>Follow the instructions shown on the external application page.</li>
+                  </ul>
+                  <p class="detail-note" data-i18n="detailsNote">This page provides a job listing summary. Review the external application for the latest role information, requirements, and instructions. Availability and hiring decisions are determined by the external listing.</p>
+                </div>
+              </details>
+<a class="apply-btn" href="https://go2affm.com/c/?p=64672&o=7459" target="_blank" rel="noopener noreferrer" data-i18n="apply">Apply Now</a>
+            </div>
+          </article>
+
+          <article class="job-card pepsi-card" data-category="Full-Time" data-search="pepsi full time usa">
+            <div class="job-image">
+              <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85" alt="Team at work">
+              <span class="badge" data-i18n="fullTime">Full-Time</span>
+            </div><div class="pepsi-brand-badge"><span class="pepsi-dot"></span><span>Pepsi</span></div>
+            <div class="job-content">
+              <h3 class="job-title">Pepsi</h3>
+              <div class="job-company" data-i18n="jobListing">Job opportunity listing</div>
+              <p class="job-description" data-i18n="pepsiDesc">Review the opportunity details and application information available through the external listing.</p>
+              <div class="meta"><span data-i18n="fullTime">Full-Time</span><span>USA</span></div>
+              <div class="job-location">📍 <strong>USA</strong> · <span data-i18n="locationAvailable">Location details available through the application</span></div>
+              
+              <details class="job-details">
+                <summary data-i18n="jobDetails">Job Details</summary>
+                <div class="job-details-body">
+                  <div class="details-grid">
+                    <div class="detail-item"><span class="detail-label" data-i18n="jobType">Job Type</span><span class="detail-value" data-detail-type="Pepsi">Full-Time</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workLocation">Location</span><span class="detail-value">USA</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="workSetting">Work Setting</span><span class="detail-value" data-detail-setting="Pepsi">See external listing</span></div>
+                    <div class="detail-item"><span class="detail-label" data-i18n="application">Application</span><span class="detail-value" data-i18n="externalApplication">External application</span></div>
+                  </div>
+                  <h4 data-i18n="responsibilities">What to Review</h4>
+                  <ul class="job-responsibilities" data-detail-resp="Pepsi">
+                    <li>Review the current opportunity information in the external listing.</li><li>Confirm the role-specific requirements and application instructions.</li><li>Continue through the external application if the listing matches your interests.</li>
+                  </ul>
+                  <h4 data-i18n="requirements">Before You Apply</h4>
+                  <ul class="job-requirements" data-detail-req="Pepsi">
+                    <li>Review the external listing for current qualifications and requirements.</li><li>Use the external application to confirm the latest information.</li>
+                  </ul>
+                  <p class="detail-note" data-i18n="detailsNote">This page provides a job listing summary. Review the external application for the latest role information, requirements, and instructions. Availability and hiring decisions are determined by the external listing.</p>
+                </div>
+              </details>
+<a class="apply-btn" href="https://www.af9m8trk.com/7B4114HH/4GY127EA/" target="_blank" rel="noopener noreferrer" data-i18n="apply">Apply Now</a>
+            </div>
+          </article>
+
+          <div class="no-results" id="noResults" data-i18n="noResults">No matching jobs were found. Try another search or category.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section how">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker" data-i18n="howKicker">Simple process</div>
+            <h2 data-i18n="howTitle">How It Works</h2>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">01</div>
+            <h3 data-i18n="step1Title">Browse</h3>
+            <p data-i18n="step1Text">Review available opportunities and choose a category.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">02</div>
+            <h3 data-i18n="step2Title">Choose</h3>
+            <p data-i18n="step2Text">Open the job that matches the type of work you want.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">03</div>
+            <h3 data-i18n="step3Title">Apply</h3>
+            <p data-i18n="step3Text">Use the Apply Now button to continue to the application.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-inner">
+        <div>
+          <h2 data-i18n="contactTitle">Have a question?</h2>
+          <p data-i18n="contactText">Contact the WorkNest support team by email.</p>
+        </div>
+        <a class="email-link" href="mailto:worklistsupport@gmail.com">worklistsupport@gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  
+    <section class="section reviews-section" id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker" data-i18n="reviewsKicker">Reviews & Ratings</div>
+            <h2 data-i18n="reviewsTitle">Share Your Experience</h2>
+            <p class="section-intro" data-i18n="reviewsIntro">Reviews can help visitors understand how useful a listing was to them. Ratings are shown as they are received.</p>
+          </div>
+        </div>
+        <div class="review-summary">
+          <div class="review-score">
+            <strong>—</strong>
+            <div class="review-stars">★★★★★</div>
+            <div class="review-count" data-i18n="noReviews">No reviews yet</div>
+          </div>
+          <div class="review-empty">
+            <strong data-i18n="beFirst">Be the first to review a listing.</strong>
+            <p data-i18n="reviewNote">Only genuine user feedback should be submitted. Ratings are not used to promise or guarantee employment.</p>
+            <div class="review-actions">
+              <a class="review-button primary" href="#contact" data-i18n="writeReview">Write a Review</a>
+              <a class="review-button" href="#jobs" data-i18n="browseJobs">Browse Jobs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<footer>
+    <div class="container footer-inner">
+      <div>© 2026 WorkNest. <span data-i18n="footerRights">All rights reserved.</span></div>
+      <div class="footer-links">
+        <a href="#home" data-i18n="footerHome">Home</a>
+        <a href="#jobs" data-i18n="footerJobs">Jobs</a>
+        <a href="#contact" data-i18n="footerContact">Contact</a>
+      </div>
     </div>
-
-
-    <!-- =========================================================
-         JAVASCRIPT
-         ========================================================= -->
-    <script>
-
-        /* =========================================================
-           MENU
-           ========================================================= */
-
-        const openMenuButton = document.getElementById("openMenu");
-        const closeMenuButton = document.getElementById("closeMenu");
-        const menuOverlay = document.getElementById("menuOverlay");
-        const menuLinks = document.querySelectorAll(".menu-close-link");
-
-        function openMenu() {
-            menuOverlay.classList.add("open");
-            document.body.classList.add("menu-open");
-        }
-
-        function closeMenu() {
-            menuOverlay.classList.remove("open");
-            document.body.classList.remove("menu-open");
-        }
-
-        openMenuButton.addEventListener("click", openMenu);
-
-        closeMenuButton.addEventListener("click", closeMenu);
-
-        menuOverlay.addEventListener("click", function(event) {
-
-            if (event.target === menuOverlay) {
-                closeMenu();
-            }
-
-        });
-
-        menuLinks.forEach(function(link) {
-
-            link.addEventListener("click", function() {
-                closeMenu();
-            });
-
-        });
-
-
-        /* =========================================================
-           JOB DATA / UI ELEMENTS
-           ========================================================= */
-
-        const jobsGrid = document.getElementById("jobsGrid");
-        const jobCards = Array.from(document.querySelectorAll(".job-card"));
-        const filterButtons = Array.from(document.querySelectorAll(".filter-button"));
-        const searchForm = document.getElementById("searchForm");
-        const searchInput = document.getElementById("searchInput");
-        const sortSelect = document.getElementById("sortSelect");
-        const emptyState = document.getElementById("emptyState");
-
-
-        let activeFilter = "All";
-        let currentSearch = "";
-
-
-        /* =========================================================
-           FILTER JOBS
-           ========================================================= */
-
-        function filterJobs() {
-
-            const query = currentSearch.trim().toLowerCase();
-
-            let visibleCount = 0;
-
-            jobCards.forEach(function(card) {
-
-                const category = card.dataset.category.toLowerCase();
-                const title = card.dataset.title.toLowerCase();
-                const description = card.dataset.description.toLowerCase();
-
-                const matchesFilter =
-                    activeFilter === "All" ||
-                    category.includes(activeFilter.toLowerCase());
-
-                const matchesSearch =
-                    !query ||
-                    title.includes(query) ||
-                    category.includes(query) ||
-                    description.includes(query);
-
-                const shouldShow =
-                    matchesFilter && matchesSearch;
-
-                card.style.display = shouldShow ? "" : "none";
-
-                if (shouldShow) {
-                    visibleCount++;
-                }
-
-            });
-
-            emptyState.style.display =
-                visibleCount === 0 ? "block" : "none";
-
-        }
-
-
-        /* =========================================================
-           FILTER BUTTONS
-           ========================================================= */
-
-        filterButtons.forEach(function(button) {
-
-            button.addEventListener("click", function() {
-
-                filterButtons.forEach(function(item) {
-                    item.classList.remove("active");
-                });
-
-                button.classList.add("active");
-
-                activeFilter = button.dataset.filter;
-
-                filterJobs();
-
-            });
-
-        });
-
-
-        /* =========================================================
-           SEARCH
-           ========================================================= */
-
-        searchForm.addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            currentSearch = searchInput.value;
-
-            filterJobs();
-
-            document.getElementById("featured").scrollIntoView({
-                behavior: "smooth"
-            });
-
-        });
-
-
-        searchInput.addEventListener("input", function() {
-
-            currentSearch = searchInput.value;
-
-            filterJobs();
-
-        });
-
-
-        /* =========================================================
-           CATEGORY CARDS
-           ========================================================= */
-
-        const categoryCards =
-            document.querySelectorAll(".category-filter");
-
-        categoryCards.forEach(function(card) {
-
-            card.addEventListener("click", function() {
-
-                const category = card.dataset.category;
-
-                activeFilter = category;
-
-                filterButtons.forEach(function(button) {
-
-                    button.classList.remove("active");
-
-                    if (button.dataset.filter === category) {
-                        button.classList.add("active");
-                    }
-
-                });
-
-                filterJobs();
-
-            });
-
-        });
-
-
-        /* =========================================================
-           SORT JOBS
-           ========================================================= */
-
-        sortSelect.addEventListener("change", function() {
-
-            const value = sortSelect.value;
-
-            const sortedCards = [...jobCards];
-
-            if (value === "newest") {
-
-                sortedCards.sort(function(a, b) {
-
-                    return Number(b.dataset.date) -
-                           Number(a.dataset.date);
-
-                });
-
-            }
-
-            if (value === "payment") {
-
-                sortedCards.sort(function(a, b) {
-
-                    return Number(b.dataset.payment) -
-                           Number(a.dataset.payment);
-
-                });
-
-            }
-
-            if (value === "featured") {
-
-                sortedCards.sort(function(a, b) {
-
-                    return Number(b.dataset.date) -
-                           Number(a.dataset.date);
-
-                });
-
-            }
-
-            sortedCards.forEach(function(card) {
-                jobsGrid.appendChild(card);
-            });
-
-            filterJobs();
-
-        });
-
-
-        /* =========================================================
-           SAVE BUTTON
-           ========================================================= */
-
-        const saveButtons =
-            document.querySelectorAll(".job-save");
-
-        saveButtons.forEach(function(button) {
-
-            button.addEventListener("click", function(event) {
-
-                event.stopPropagation();
-
-                if (button.textContent.trim() === "♡") {
-
-                    button.textContent = "♥";
-
-                } else {
-
-                    button.textContent = "♡";
-
-                }
-
-            });
-
-        });
-
-
-        /* =========================================================
-           JOB DETAILS MODAL
-           ========================================================= */
-
-        const modalOverlay =
-            document.getElementById("jobModal");
-
-        const modalClose =
-            document.getElementById("closeModal");
-
-        const modalImage =
-            document.getElementById("modalImage");
-
-        const modalTitle =
-            document.getElementById("modalTitle");
-
-        const modalDescription =
-            document.getElementById("modalDescription");
-
-        const modalPayment =
-            document.getElementById("modalPayment");
-
-        const modalApply =
-            document.getElementById("modalApply");
-
-
-        let currentJobURL = "#";
-
-
-        function openJobModal(card) {
-
-            modalImage.src = card.dataset.image;
-
-            modalTitle.textContent =
-                card.dataset.title;
-
-            modalDescription.textContent =
-                card.dataset.description;
-
-            modalPayment.textContent =
-                "$" + card.dataset.payment + "+";
-
-            /*
-             * IMPORTANT:
-             * Replace the URL below with the authorized tracking
-             * / application URL for THIS offer.
-             *
-             * Example:
-             * currentJobURL = "https://example.com/your-offer";
-             */
-
-            currentJobURL = "#";
-
-            modalOverlay.classList.add("open");
-
-            document.body.classList.add("menu-open");
-
-        }
-
-
-        function closeJobModal() {
-
-            modalOverlay.classList.remove("open");
-
-            document.body.classList.remove("menu-open");
-
-        }
-
-
-        document.querySelectorAll(".view-job")
-            .forEach(function(button) {
-
-                button.addEventListener("click", function() {
-
-                    const card =
-                        button.closest(".job-card");
-
-                    openJobModal(card);
-
-                });
-
-            });
-
-
-        modalClose.addEventListener("click", closeJobModal);
-
-
-        modalOverlay.addEventListener("click", function(event) {
-
-            if (event.target === modalOverlay) {
-                closeJobModal();
-            }
-
-        });
-
-
-        modalApply.addEventListener("click", function() {
-
-            if (currentJobURL === "#") {
-
-                alert(
-                    "Please add the authorized application URL for this opportunity in the JavaScript section."
-                );
-
-                return;
-            }
-
-            window.open(
-                currentJobURL,
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-        });
-
-
-        /* =========================================================
-           ESCAPE KEY
-           ========================================================= */
-
-        document.addEventListener("keydown", function(event) {
-
-            if (event.key === "Escape") {
-
-                closeMenu();
-                closeJobModal();
-
-            }
-
-        });
-
-
-        /* =========================================================
-           INITIAL STATE
-           ========================================================= */
-
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        topbar:"Professional job opportunities for U.S. job seekers",
+        navHome:"Home", navJobs:"Jobs", navCategories:"Categories", navContact:"Contact",
+        eyebrow:"JOB OPPORTUNITIES",
+        heroTitle:"Find Your Next Opportunity",
+        heroCopy:"Explore selected remote, full-time and part-time opportunities in one simple place.",
+        searchPlaceholder:"Search jobs or keywords", searchButton:"Search Jobs",
+        point1:"Simple job search", point2:"U.S. opportunities", point3:"Direct application links",
+        featuredLabel:"Featured opportunities", featuredText:"Browse. Choose. Apply.",
+        categoryKicker:"Browse by category", categoryTitle:"Find work that fits your schedule",
+        categorySub:"Choose a category to narrow the opportunities below.",
+        remote:"Remote Jobs", remoteSub:"Work from home opportunities",
+        fullTime:"Full-Time Jobs", fullTimeSub:"Regular work opportunities",
+        partTime:"Part-Time Jobs", partTimeSub:"Flexible work opportunities",
+        jobsKicker:"Featured opportunities", jobsTitle:"Available Jobs",
+        jobsSub:"Review the opportunity and apply directly through the listing.",
+        all:"All Jobs", remoteFilter:"Remote", fullTimeFilter:"Full-Time", partTimeFilter:"Part-Time",
+        listing:"Job opportunity listing", jobListing:"Job opportunity listing",
+        higherDesc:"Explore a work opportunity with application details available through the listing.",
+        cleaningDesc:"Browse a cleaning opportunity and review the application information provided by the external listing.",
+        amazonDesc:"Explore a work-from-home opportunity and review the application requirements on the external listing.",
+        careerDesc:"Review the available career opportunity and application details through the external listing.",
+        pepsiDesc:"Review the opportunity details and application information available through the external listing.",
+        locationAvailable:"Location details available through the application",
+        remoteLocation:"Remote", workFromHome:"Work From Home", apply:"Apply Now",
+
+        jobDetails:"Job Details", jobType:"Job Type", workLocation:"Location", workSetting:"Work Setting",
+        application:"Application", externalApplication:"External application", responsibilities:"What to Review",
+        requirements:"Before You Apply", seeListing:"See external listing",
+        detailsNote:"This page provides a job listing summary. Review the external application for the latest role information, requirements, and instructions. Availability and hiring decisions are determined by the external listing.",
+        whyKicker:"Helpful information", whyTitle:"A Simple Way to Explore Opportunities",
+        whyText:"WorkNest brings selected job opportunity listings together in a clear format so visitors can review the available information and continue to the external application.",
+        why1Title:"Review Before Applying", why1Text:"Open the job details, review the available information, and check the external listing before submitting an application.",
+        why2Title:"Clear Job Information", why2Text:"Each listing presents the category, location, work setting, and application path in one place.",
+        why3Title:"External Application", why3Text:"Apply Now takes visitors to the external application page, where the latest requirements and instructions are provided.",
+        listingDisclaimer:"WorkNest is a job opportunity listing website. Job availability, eligibility, hiring decisions, and application terms are determined by the external listing. No employment outcome is guaranteed.",
+        reviewsKicker:"Reviews & Ratings", reviewsTitle:"Share Your Experience",
+        reviewsIntro:"Reviews can help visitors understand how useful a listing was to them. Ratings are shown as they are received.",
+        noReviews:"No reviews yet", beFirst:"Be the first to review a listing.",
+        reviewNote:"Only genuine user feedback should be submitted. Ratings are not used to promise or guarantee employment.",
+        writeReview:"Write a Review", browseJobs:"Browse Jobs",
+        noResults:"No matching jobs were found. Try another search or category.",
+        howKicker:"Simple process", howTitle:"How It Works",
+        step1Title:"Browse", step1Text:"Review available opportunities and choose a category.",
+        step2Title:"Choose", step2Text:"Open the job that matches the type of work you want.",
+        step3Title:"Apply", step3Text:"Use the Apply Now button to continue to the application.",
+        contactTitle:"Have a question?", contactText:"Contact the WorkNest support team by email.",
+        footerRights:"All rights reserved.", footerHome:"Home", footerJobs:"Jobs", footerContact:"Contact"
+      },
+      es: {
+        topbar:"Oportunidades de empleo profesionales para personas que buscan trabajo en EE. UU.",
+        navHome:"Inicio", navJobs:"Empleos", navCategories:"Categorías", navContact:"Contacto",
+        eyebrow:"OPORTUNIDADES DE EMPLEO",
+        heroTitle:"Encuentra Tu Próxima Oportunidad",
+        heroCopy:"Explora oportunidades remotas, de tiempo completo y de medio tiempo en un solo lugar.",
+        searchPlaceholder:"Buscar empleos o palabras clave", searchButton:"Buscar empleos",
+        point1:"Búsqueda sencilla", point2:"Oportunidades en EE. UU.", point3:"Enlaces directos para solicitar",
+        featuredLabel:"Oportunidades destacadas", featuredText:"Explora. Elige. Solicita.",
+        categoryKicker:"Buscar por categoría", categoryTitle:"Encuentra un trabajo que se adapte a tu horario",
+        categorySub:"Elige una categoría para filtrar las oportunidades.",
+        remote:"Empleos remotos", remoteSub:"Oportunidades para trabajar desde casa",
+        fullTime:"Empleos de tiempo completo", fullTimeSub:"Oportunidades de trabajo regular",
+        partTime:"Empleos de medio tiempo", partTimeSub:"Oportunidades con horarios flexibles",
+        jobsKicker:"Oportunidades destacadas", jobsTitle:"Empleos disponibles",
+        jobsSub:"Revisa la oportunidad y solicita directamente desde el anuncio.",
+        all:"Todos", remoteFilter:"Remoto", fullTimeFilter:"Tiempo completo", partTimeFilter:"Medio tiempo",
+        listing:"Anuncio de oportunidad laboral", jobListing:"Anuncio de oportunidad laboral",
+        higherDesc:"Explora una oportunidad de trabajo y revisa los detalles de solicitud disponibles en el anuncio.",
+        cleaningDesc:"Consulta una oportunidad de limpieza y revisa la información de solicitud del anuncio externo.",
+        amazonDesc:"Explora una oportunidad para trabajar desde casa y revisa los requisitos en el anuncio externo.",
+        careerDesc:"Revisa la oportunidad profesional disponible y los detalles de solicitud en el anuncio externo.",
+        pepsiDesc:"Revisa los detalles de la oportunidad y la información de solicitud disponible en el anuncio externo.",
+        locationAvailable:"Detalles de ubicación disponibles en la solicitud",
+        remoteLocation:"Remoto", workFromHome:"Trabajo desde casa", apply:"Solicitar ahora",
+        
+        jobDetails:"Detalles del empleo", jobType:"Tipo de empleo", workLocation:"Ubicación", workSetting:"Modalidad de trabajo",
+        application:"Solicitud", externalApplication:"Solicitud externa", responsibilities:"Qué revisar",
+        requirements:"Antes de solicitar", seeListing:"Ver anuncio externo",
+        detailsNote:"Esta página ofrece un resumen del anuncio. Revisa la solicitud externa para conocer la información, requisitos e instrucciones más recientes. La disponibilidad y las decisiones de contratación dependen del anuncio externo.",
+        whyKicker:"Información útil", whyTitle:"Una forma sencilla de explorar oportunidades",
+        whyText:"WorkNest reúne oportunidades laborales seleccionadas en un formato claro para que los visitantes revisen la información disponible y continúen con la solicitud externa.",
+        why1Title:"Revisa antes de solicitar", why1Text:"Abre los detalles, revisa la información disponible y consulta el anuncio externo antes de enviar una solicitud.",
+        why2Title:"Información clara", why2Text:"Cada anuncio muestra la categoría, ubicación, modalidad de trabajo y vía de solicitud en un solo lugar.",
+        why3Title:"Solicitud externa", why3Text:"El botón Solicitar ahora lleva a la página de solicitud externa, donde aparecen los requisitos e instrucciones más recientes.",
+        listingDisclaimer:"WorkNest es un sitio de anuncios de oportunidades laborales. La disponibilidad, elegibilidad, decisiones de contratación y condiciones de solicitud dependen del anuncio externo. No se garantiza ningún resultado laboral.",
+        reviewsKicker:"Reseñas y calificaciones", reviewsTitle:"Comparte tu experiencia",
+        reviewsIntro:"Las reseñas pueden ayudar a los visitantes a entender qué tan útil fue un anuncio. Las calificaciones se muestran a medida que se reciben.",
+        noReviews:"Aún no hay reseñas", beFirst:"Sé la primera persona en reseñar un anuncio.",
+        reviewNote:"Solo deben enviarse comentarios reales de usuarios. Las calificaciones no se utilizan para prometer ni garantizar empleo.",
+        writeReview:"Escribir una reseña", browseJobs:"Ver empleos",
+        noResults:"No se encontraron empleos. Prueba otra búsqueda o categoría.",
+        howKicker:"Proceso sencillo", howTitle:"Cómo funciona",
+        step1Title:"Explora", step1Text:"Revisa las oportunidades disponibles y elige una categoría.",
+        step2Title:"Elige", step2Text:"Abre el empleo que coincida con el tipo de trabajo que buscas.",
+        step3Title:"Solicita", step3Text:"Usa el botón Solicitar ahora para continuar con la solicitud.",
+        contactTitle:"¿Tienes alguna pregunta?", contactText:"Contacta al equipo de soporte de WorkNest por correo electrónico.",
+        footerRights:"Todos los derechos reservados.", footerHome:"Inicio", footerJobs:"Empleos", footerContact:"Contacto"
+      }
+    };
+
+    let currentLang = "en";
+    let currentFilter = "All";
+
+    const languageSelect = document.getElementById("languageSelect");
+    const searchForm = document.getElementById("searchForm");
+    const searchInput = document.getElementById("searchInput");
+    const jobCards = [...document.querySelectorAll(".job-card")];
+    const filterButtons = [...document.querySelectorAll(".filter")];
+    const resultCount = document.getElementById("resultCount");
+    const noResults = document.getElementById("noResults");
+
+    function applyLanguage(lang){
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.dataset.i18n;
+        if(translations[lang][key]) el.textContent = translations[lang][key];
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+        const key = el.dataset.i18nPlaceholder;
+        if(translations[lang][key]) el.placeholder = translations[lang][key];
+      });
+      filterJobs();
+    }
+
+    function filterJobs(){
+      const query = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+
+      jobCards.forEach(card=>{
+        const matchesCategory = currentFilter === "All" || card.dataset.category === currentFilter;
+        const matchesSearch = !query || card.dataset.search.includes(query) || card.querySelector(".job-title").textContent.toLowerCase().includes(query);
+        const show = matchesCategory && matchesSearch;
+        card.style.display = show ? "" : "block";
+        if(!show) card.style.display = "none";
+        if(show) visible++;
+      });
+
+      noResults.style.display = visible ? "none" : "block";
+      resultCount.textContent = `${visible} ${currentLang === "en" ? (visible === 1 ? "job" : "jobs") : (visible === 1 ? "empleo" : "empleos")}`;
+    }
+
+    filterButtons.forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        filterButtons.forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        currentFilter = btn.dataset.filter;
         filterJobs();
+      });
+    });
 
+    document.querySelectorAll("[data-category-link]").forEach(link=>{
+      link.addEventListener("click",()=>{
+        const target = link.dataset.categoryLink;
+        currentFilter = target;
+        filterButtons.forEach(b=>b.classList.toggle("active", b.dataset.filter === target));
+        setTimeout(filterJobs, 0);
+      });
+    });
+
+    searchForm.addEventListener("submit", e=>{
+      e.preventDefault();
+      document.getElementById("jobs").scrollIntoView({behavior:"smooth"});
+      filterJobs();
+    });
+
+    languageSelect.addEventListener("change", e=>applyLanguage(e.target.value));
+
+    applyLanguage("en");
+  </script>
+
+    <script>
+      (function(){
+        const detailData = {
+          "Higher Income Jobs": {
+            en:{type:"Full-Time",setting:"See external listing",resp:["Review the position information provided in the external listing.","Check the current application requirements before applying.","Complete the application through the external listing."],req:["Review the listing for current qualifications and requirements.","Provide accurate information during the application process."]},
+            es:{type:"Tiempo completo",setting:"Ver anuncio externo",resp:["Revisa la información del puesto proporcionada en el anuncio externo.","Comprueba los requisitos actuales antes de solicitar.","Completa la solicitud mediante el anuncio externo."],req:["Revisa el anuncio para conocer las cualificaciones y requisitos actuales.","Proporciona información precisa durante la solicitud."]}
+          },
+          "Cleaning Jobs": {
+            en:{type:"Part-Time",setting:"See external listing",resp:["Review the cleaning position information in the external listing.","Check the current role requirements and application instructions.","Submit the requested information through the application page."],req:["Review the listing for current qualifications.","Follow the application instructions provided by the external listing."]},
+            es:{type:"Medio tiempo",setting:"Ver anuncio externo",resp:["Revisa la información del puesto de limpieza en el anuncio externo.","Consulta los requisitos actuales y las instrucciones de solicitud.","Envía la información solicitada mediante la página de solicitud."],req:["Revisa el anuncio para conocer las cualificaciones actuales.","Sigue las instrucciones de solicitud proporcionadas por el anuncio externo."]}
+          },
+          "Amazon From Home": {
+            en:{type:"Remote",setting:"Work From Home",resp:["Review the remote opportunity and the information supplied by the external listing.","Check the current application requirements.","Continue to the external application when ready."],req:["Review the external listing for current requirements.","Use accurate information when completing the application."]},
+            es:{type:"Remoto",setting:"Trabajo desde casa",resp:["Revisa la oportunidad remota y la información del anuncio externo.","Consulta los requisitos actuales de solicitud.","Continúa con la solicitud externa cuando estés listo."],req:["Revisa el anuncio externo para conocer los requisitos actuales.","Utiliza información precisa al completar la solicitud."]}
+          },
+          "Start A Career Today": {
+            en:{type:"Full-Time",setting:"See external listing",resp:["Review the opportunity information before applying.","Check the current requirements and application instructions.","Complete the application through the external listing."],req:["Review the listing for current qualifications.","Follow the instructions shown on the external application page."]},
+            es:{type:"Tiempo completo",setting:"Ver anuncio externo",resp:["Revisa la información de la oportunidad antes de solicitar.","Consulta los requisitos actuales y las instrucciones.","Completa la solicitud mediante el anuncio externo."],req:["Revisa el anuncio para conocer las cualificaciones actuales.","Sigue las instrucciones mostradas en la página de solicitud externa."]}
+          },
+          "Pepsi": {
+            en:{type:"Full-Time",setting:"See external listing",resp:["Review the current opportunity information in the external listing.","Confirm the role-specific requirements and application instructions.","Continue through the external application if the listing matches your interests."],req:["Review the external listing for current qualifications and requirements.","Use the external application to confirm the latest information."]},
+            es:{type:"Tiempo completo",setting:"Ver anuncio externo",resp:["Revisa la información actual de la oportunidad en el anuncio externo.","Confirma los requisitos específicos y las instrucciones de solicitud.","Continúa mediante la solicitud externa si el anuncio coincide con tus intereses."],req:["Revisa el anuncio externo para conocer las cualificaciones y requisitos actuales.","Utiliza la solicitud externa para confirmar la información más reciente."]}
+          }
+        };
+        window.applyDetailLanguage = function(lang){
+          document.querySelectorAll("[data-detail-type]").forEach(el=>{
+            const key=el.getAttribute("data-detail-type");
+            if(detailData[key]) el.textContent=detailData[key][lang].type;
+          });
+          document.querySelectorAll("[data-detail-setting]").forEach(el=>{
+            const key=el.getAttribute("data-detail-setting");
+            if(detailData[key]) el.textContent=detailData[key][lang].setting;
+          });
+          document.querySelectorAll("[data-detail-resp]").forEach(el=>{
+            const key=el.getAttribute("data-detail-resp");
+            if(detailData[key]) el.innerHTML=detailData[key][lang].resp.map(x=>"<li>"+x+"</li>").join("");
+          });
+          document.querySelectorAll("[data-detail-req]").forEach(el=>{
+            const key=el.getAttribute("data-detail-req");
+            if(detailData[key]) el.innerHTML=detailData[key][lang].req.map(x=>"<li>"+x+"</li>").join("");
+          });
+        };
+        const originalSetLanguage = window.setLanguage;
+        if(typeof originalSetLanguage === "function"){
+          window.setLanguage = function(lang){
+            originalSetLanguage(lang);
+            window.applyDetailLanguage(lang);
+          };
+        }
+        setTimeout(()=>window.applyDetailLanguage(document.documentElement.lang==="es"?"es":"en"),50);
+      })();
     </script>
 
 </body>
